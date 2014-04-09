@@ -15,6 +15,7 @@ from webpage import PirateBayURLBuilder
 class ResultCache:
 	#Object to hold all data relevant to search including metadata such as comments, languages, and number of files
 	def __init__(self):
+		self.mag_hashes = []
 		self.magnetLinks = []
 		self.titles = []
 		self.seeds = []
@@ -28,6 +29,14 @@ class ResultCache:
 	def __str__(self):
 		return str(self.titles) + str(self.magnetLinks) + str(self.seeds) + str(self.leeches) + str(self.sizes) + str(self.infoLinks) + str(self.comments) + str(self.languages)
 	
+	def _get_magnet_hashes(self):
+		for link in self.magnetLinks:
+			p1 = link.split('&')
+			hash = p1[0].replace("magnet:?xt=urn:btih:","").strip().lower()
+			self.mag_hashes.append(hash)
+		return self.mag_hashes
+	#def de_duplicate_cache(self):
+			
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
