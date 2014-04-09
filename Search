@@ -1,0 +1,37 @@
+#!/usr/bin/python
+import sys
+import cgi
+import datafetch.searchbuilder
+def GET():
+	form = cgi.FieldStorage()
+	print "Content-type:text/html\r\n\r\n"
+	if "term" not in form:
+		print "<H1>Error</H1>"
+		print "Please fill in term field."
+		return
+	elif "category" not in form:
+		print "<H1>Error</H1>"
+		print "Please fill in category field."
+		return
+	else:
+		
+		cache = datafetch.searchbuilder.Search(str(form["term"].value),str(form["category"].value))
+		cache.build_cache()
+		json = cache.get_cache().to_json()
+		lines = json.split('\n')
+		for line in lines:
+			#spaces = 0
+			#for i in line:
+			#	if i == ' ':
+			#		spaces += 1
+			#	else:
+			#		break
+			#for i in range(0, spaces):
+			#	print '&nbsp;'
+			
+						
+			print line
+			#print "<br>"
+
+
+GET()
