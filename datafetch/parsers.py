@@ -59,7 +59,7 @@ class InfoCache:
 		self.languages = language
 	
 	def add_number_of_files(self, numberOfFiles):
-		self.numberOfFilesList = numberOfFiles
+		self.numberOfFiles = numberOfFiles
 	
 	def get_comments(self):
 		return self.comments
@@ -68,7 +68,7 @@ class InfoCache:
 		return self.languages
 
 	def get_number_of_files(self):
-		return self.numberOfFilesList
+		return self.numberOfFiles
 
 	
 class KickAssSearchParser:

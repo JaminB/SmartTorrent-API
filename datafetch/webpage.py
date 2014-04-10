@@ -50,8 +50,8 @@ class Content:
 		self.url = url
 
 	def get(self):
-		socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS4, "127.0.0.1", 9050)
-		socket.socket = socks.socksocket
+		#socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS4, "127.0.0.1", 9050)
+		#socket.socket = socks.socksocket
 		self.url = self.url.replace(' ', '%20')
 		
 		if "http" not in str(self.url):	
