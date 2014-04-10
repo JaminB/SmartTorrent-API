@@ -15,7 +15,6 @@ from webpage import PirateBayURLBuilder
 class ResultCache:
 	#Object to hold all data relevant to search including metadata such as comments, languages, and number of files
 	def __init__(self):
-		self.mag_hashes = []
 		self.magnetLinks = []
 		self.titles = []
 		self.seeds = []
@@ -30,13 +29,36 @@ class ResultCache:
 		return str(self.titles) + str(self.magnetLinks) + str(self.seeds) + str(self.leeches) + str(self.sizes) + str(self.infoLinks) + str(self.comments) + str(self.languages)
 	
 	def _get_magnet_hashes(self):
+		magHashes = []
 		for link in self.magnetLinks:
 			p1 = link.split('&')
 			hash = p1[0].replace("magnet:?xt=urn:btih:","").strip().lower()
-			self.mag_hashes.append(hash)
-		return self.mag_hashes
-	#def de_duplicate_cache(self):
-			
+			magHashes.append(hash)
+		return magHashes
+	
+	def de_duplicate_cache(self):
+		duplicates = []
+		hashes = self._get_magnet_hashes()
+		for i in range(0, len(hashes)):
+			for j in range(i,len(hashes)):
+				if i != j:
+					if hashes[i] == hashes[j]:
+						del(self.magnetLinks[i])
+						del(self.titles[i])
+						del(self.seeds[i])
+						del(self.leeches[i])
+						del(self.sizes[i])
+						del(self.infoLinks[i])
+						del(self.comments[i])
+						del(self.languages[i])
+						del(self.numberOfFilesList[i])
+						duplicates.append(hashes[i])
+		
+		#for k in range(0, len(duplicates)):
+		#	for l in range(0, len(hashes)):
+		#		if duplicates[k] == hashes[l]:
+						
+		#				print "duplicate type: " + str(k) + " = " + self.sizes[l] + " = " + self.titles[l]
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
@@ -92,6 +114,7 @@ class ResultCache:
 		return self.numberOfFilesList
 	
 	def to_json(self):
+		self.de_duplicate_cache()
 		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.comments},sort_keys=True, indent=4)
 
 

@@ -3,6 +3,6 @@
 import sys
 import searchbuilder
 
-cache = searchbuilder.Search("captain america","movie")
+cache = searchbuilder.Search("Woodkid","music")
 cache.build_cache()
-print cache.get_cache().to_json()
+print cache.get_cache()
