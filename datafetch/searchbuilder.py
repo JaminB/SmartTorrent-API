@@ -39,6 +39,7 @@ class ResultCache:
 	def de_duplicate_cache(self):
 		duplicates = []
 		hashes = self._get_magnet_hashes()
+		#print len(hashes)
 		for i in range(0, len(hashes)):
 			for j in range(i,len(hashes)):
 				if i != j:
@@ -53,12 +54,17 @@ class ResultCache:
 						del(self.languages[i])
 						del(self.numberOfFilesList[i])
 						duplicates.append(hashes[i])
-		
-		#for k in range(0, len(duplicates)):
-		#	for l in range(0, len(hashes)):
-		#		if duplicates[k] == hashes[l]:
+		#for dupe in duplicates:
+		#	print dupe
+		hashes = self._get_magnet_hashes()
+		#for hash in hashes:
+		#	print hash
+	#	print len(hashes)
+	#	for k in range(0, len(duplicates)):
+	#		for l in range(0, len(hashes)):
+	#			if duplicates[k] == hashes[l]:
 						
-		#				print "duplicate type: " + str(k) + " = " + self.sizes[l] + " = " + self.titles[l]
+	#					print hashes[l]
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
