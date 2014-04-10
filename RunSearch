@@ -1,9 +1,14 @@
 #!/usr/bin/python
-import datafetch.searchbuilder
 import sys
-cache = datafetch.searchbuilder.Search(str(sys.argv[1]),str(sys.argv[2]))
-cache.build_cache()
-json = cache.get_cache().to_json()
-lines = json.split('\n')
-for line in lines:
-	print line
+import datafetch.searchbuilder
+def GET():
+	cache = datafetch.searchbuilder.Search(sys.argv[1],sys.argv[2])
+	cache.build_cache()
+	json = cache.get_cache().to_json()
+	lines = json.split('\n')
+	for line in lines:
+			print line
+			#print "<br>"
+
+
+GET()
