@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import cgi
+import os
 import datafetch.searchbuilder
 def GET():
 	form = cgi.FieldStorage()
@@ -14,24 +15,6 @@ def GET():
 		print "Please fill in category field."
 		return
 	else:
-		
-		cache = datafetch.searchbuilder.Search(str(form["term"].value),str(form["category"].value))
-		cache.build_cache()
-		json = cache.get_cache().to_json()
-		lines = json.split('\n')
-		for line in lines:
-			#spaces = 0
-			#for i in line:
-			#	if i == ' ':
-			#		spaces += 1
-			#	else:
-			#		break
-			#for i in range(0, spaces):
-			#	print '&nbsp;'
-			
-						
-			print line
-			#print "<br>"
-
+		result = os.popen('proxychains ./RunSearch ' + form["term"].value + " " + form["category"])
 
 GET()
