@@ -36,35 +36,36 @@ class ResultCache:
 			magHashes.append(hash)
 		return magHashes
 	
-	def de_duplicate_cache(self):
+	def _get_duplicate_hashes(self):
 		duplicates = []
 		hashes = self._get_magnet_hashes()
-		#print len(hashes)
 		for i in range(0, len(hashes)):
 			for j in range(i,len(hashes)):
 				if i != j:
 					if hashes[i] == hashes[j]:
-						del(self.magnetLinks[i])
-						del(self.titles[i])
-						del(self.seeds[i])
-						del(self.leeches[i])
-						del(self.sizes[i])
-						del(self.infoLinks[i])
-						del(self.comments[i])
-						del(self.languages[i])
-						del(self.numberOfFilesList[i])
 						duplicates.append(hashes[i])
-		#for dupe in duplicates:
-		#	print dupe
+		return duplicates
+	
+	def de_duplicate_cache(self):
+		#Finds duplicate data using magnet hashes, removes this duplicate data and aggregate comments to first occurence.
+		duplicates =self._get_duplicate_hashes()
 		hashes = self._get_magnet_hashes()
-		#for hash in hashes:
-		#	print hash
-	#	print len(hashes)
-	#	for k in range(0, len(duplicates)):
-	#		for l in range(0, len(hashes)):
-	#			if duplicates[k] == hashes[l]:
-						
-	#					print hashes[l]
+		for i in range(0, len(duplicates)):
+			firstOccurence = hashes.index(duplicates[i])
+			for j in range(0, len(hashes)):
+				if duplicates[i] == hashes[j]:
+					if j != firstOccurence:
+						self.comments[firstOccurence] += self.comments[j]
+						del self.titles[j]
+						del self.seeds[j]
+						del self.leeches[j]
+						del self.sizes[j]
+						del self.infoLinks[j]
+						del self.comments[j]
+						del self.languages[j]
+						del self.numberOfFilesList[j]
+						del self.magnetLinks[j]
+			
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
