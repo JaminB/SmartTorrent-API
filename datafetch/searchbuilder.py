@@ -45,26 +45,64 @@ class ResultCache:
 					if hashes[i] == hashes[j]:
 						duplicates.append(hashes[i])
 		return duplicates
-	
+	def _get_duplicate_hash_first_occurences(self):
+		duplicates = self._get_duplicate_hashes()
+		hashes = self._get_magnet_hashes()
+		firstOccurences = []
+		for duplicate in duplicates:
+			firstOccurences.append(hashes.index(duplicate))
+		return firstOccurences
+
 	def de_duplicate_cache(self):
 		#Finds duplicate data using magnet hashes, removes this duplicate data and aggregate comments to first occurence.
-		duplicates =self._get_duplicate_hashes()
+		titles = []
+		magnetLinks = []
+		seeds = []
+		leeches = []
+		sizes = []
+		infoLinks = []
+		comments = []
+		languages = []
+		numberOfFilesList = []
+		hashesMarked = []
 		hashes = self._get_magnet_hashes()
-		for i in range(0, len(duplicates)):
-			firstOccurence = hashes.index(duplicates[i])
-			for j in range(0, len(hashes)):
-				if duplicates[i] == hashes[j]:
-					if j != firstOccurence:
-						self.comments[firstOccurence] += self.comments[j]
-						del self.titles[j]
-						del self.seeds[j]
-						del self.leeches[j]
-						del self.sizes[j]
-						del self.infoLinks[j]
-						del self.comments[j]
-						del self.languages[j]
-						del self.numberOfFilesList[j]
-						del self.magnetLinks[j]
+		duplicates = self._get_duplicate_hashes()
+		firstOccurrences = self._get_duplicate_hash_first_occurences()
+		for i in range(0, len(hashes)):
+			added = False
+			for j in range(0, len(duplicates)):
+				if hashes[i] == duplicates[j]: 
+					if i in firstOccurrences: #If true, add to new list
+						added = True
+						titles.append(self.titles[i])
+						hashesMarked.append(hashes[i])
+						titles.append(self.titles[i])
+						seeds.append(self.seeds[i])
+						leeches.append(self.leeches[i])
+						sizes.append(self.sizes[i])
+						infoLinks.append(self.infoLinks[i])
+						comments.append(self.comments[i])
+						languages.append(self.languages[i])
+						numberOfFilesList.append(self.numberOfFilesList[i])
+					else:
+						#print "duplicate: " + self.titles[i]
+						aggregateIndex = hashesMarked.index(hashes[i])
+						comments[aggregateIndex] += self.comments[i]
+			if not added:
+				titles.append(self.titles[i])
+				seeds.append(self.seeds[i])
+				leeches.append(self.leeches[i])
+				sizes.append(self.sizes[i])
+				infoLinks.append(self.infoLinks[i])
+				comments.append(self.comments[i])
+				languages.append(self.languages[i])
+				numberOfFilesList.append(self.numberOfFilesList[i])
+			#self.titles = titles
+			#self.magnetLinks = magnetLinks
+			#self.sizes = sizes
+			#self.infoLinks = infoLinks
+			#self.leeches = leeches
+			#self.comments = comments
 			
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
@@ -121,7 +159,7 @@ class ResultCache:
 		return self.numberOfFilesList
 	
 	def to_json(self):
-		self.de_duplicate_cache()
+		#self.de_duplicate_cache()
 		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.comments},sort_keys=True, indent=4)
 
 
