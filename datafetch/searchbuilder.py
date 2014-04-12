@@ -55,55 +55,63 @@ class ResultCache:
 
 	def de_duplicate_cache(self):
 		#Finds duplicate data using magnet hashes, removes this duplicate data and aggregate comments to first occurence.
-		titles = []
-		magnetLinks = []
-		seeds = []
-		leeches = []
-		sizes = []
-		infoLinks = []
-		comments = []
-		languages = []
-		numberOfFilesList = []
-		hashesMarked = []
+		dTitles = self.titles
+		dMagnetLinks = self.magnetLinks
+		dSeeds = self.seeds
+		dLeeches = self.leeches
+		dSizes = self.sizes
+		dInfoLinks = self.infoLinks
+		dComments = self.comments
+		dLanguages = self.languages
+		dNumberOfFilesList = self.numberOfFilesList
 		hashes = self._get_magnet_hashes()
+		markedHashes = []
 		duplicates = self._get_duplicate_hashes()
-		firstOccurrences = self._get_duplicate_hash_first_occurences()
+		dIndexes = self._get_duplicate_hash_first_occurences()
+		oTitles, oMagnetLinks, oSeeds, oLeeches, oSizes, oInfoLinks, oComments, oLanguages, oNumberOfFilesList = ([] for i in range(9))
+		
 		for i in range(0, len(hashes)):
-			added = False
-			for j in range(0, len(duplicates)):
-				if hashes[i] == duplicates[j]: 
-					if i in firstOccurrences: #If true, add to new list
-						added = True
-						titles.append(self.titles[i])
-						hashesMarked.append(hashes[i])
-						titles.append(self.titles[i])
-						seeds.append(self.seeds[i])
-						leeches.append(self.leeches[i])
-						sizes.append(self.sizes[i])
-						infoLinks.append(self.infoLinks[i])
-						comments.append(self.comments[i])
-						languages.append(self.languages[i])
-						numberOfFilesList.append(self.numberOfFilesList[i])
-					else:
-						#print "duplicate: " + self.titles[i]
-						aggregateIndex = hashesMarked.index(hashes[i])
-						comments[aggregateIndex] += self.comments[i]
-			if not added:
-				titles.append(self.titles[i])
-				seeds.append(self.seeds[i])
-				leeches.append(self.leeches[i])
-				sizes.append(self.sizes[i])
-				infoLinks.append(self.infoLinks[i])
-				comments.append(self.comments[i])
-				languages.append(self.languages[i])
-				numberOfFilesList.append(self.numberOfFilesList[i])
-			#self.titles = titles
-			#self.magnetLinks = magnetLinks
-			#self.sizes = sizes
-			#self.infoLinks = infoLinks
-			#self.leeches = leeches
-			#self.comments = comments
-			
+			if hashes[i] not in duplicates:
+				#print dTitles[i]
+				oTitles.append(self.titles[i])
+				oMagnetLinks.append(self.magnetLinks[i])
+				oSeeds.append(self.seeds[i])
+				oLeeches.append(self.leeches[i])
+				oSizes.append(self.sizes[i])
+				oInfoLinks.append(self.infoLinks[i])
+				oComments.append(self.comments[i])
+				oLanguages.append(self.languages[i])
+				oNumberOfFilesList.append(self.numberOfFilesList[i])
+
+
+			else:
+				if hashes[i] not in markedHashes:
+					markedHashes.append(hashes[i])
+					oTitles.append(self.titles[i])
+					oMagnetLinks.append(self.magnetLinks[i])
+					oSeeds.append(self.seeds[i])
+					oLeeches.append(self.leeches[i])
+					oSizes.append(self.sizes[i])
+					oInfoLinks.append(self.infoLinks[i])
+					oComments.append(self.comments[i])
+					oLanguages.append(self.languages[i])
+					oNumberOfFilesList.append(self.numberOfFilesList[i])
+				else:
+					oComments[markedHashes.index(hashes[i])] += self.comments[i]
+
+		self.titles = oTitles
+		self.magnetLinks = oMagnetLinks
+		self.seeds = oSeeds
+		self.leeches= oLeeches
+		self.sizes = oSizes
+		self.infoLinks = oInfoLinks
+		self.comments = oComments
+		self.languages = oLanguages
+		self.NumberOfFilesList = oNumberOfFilesList
+		#for title in self.titles:
+		#	print title
+		
+		
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
@@ -159,7 +167,7 @@ class ResultCache:
 		return self.numberOfFilesList
 	
 	def to_json(self):
-		#self.de_duplicate_cache()
+		self.de_duplicate_cache()
 		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.comments},sort_keys=True, indent=4)
 
 
