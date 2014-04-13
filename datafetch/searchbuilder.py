@@ -167,7 +167,6 @@ class ResultCache:
 		return self.numberOfFilesList
 	
 	def to_json(self):
-		self.de_duplicate_cache()
 		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.comments},sort_keys=True, indent=4)
 
 

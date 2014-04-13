@@ -15,9 +15,11 @@ def GET():
 		return
 	else:
 		
-		cache = datafetch.searchbuilder.Search(str(form["term"].value),str(form["category"].value))
-		cache.build_cache()
-		json = cache.get_cache().to_json()
+		buildCache = datafetch.searchbuilder.Search(str(form["term"].value),str(form["category"].value))
+		buildCache.build_cache()
+		cache = buildCache.get_cache()
+		cache.de_duplicate_cache()
+		json = cache.to_json()
 		lines = json.split('\n')
 		for line in lines:
 			#spaces = 0

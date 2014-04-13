@@ -285,7 +285,8 @@ class PirateBaySearchParser:
 	
 	def size(self):
 		return self.cacheSize
-class PirateBayInfoLinkParser:	
+class PirateBayInfoLinkParser:
+	#Pulls relevant data off the info page stores in cache
 	def __init__(self, webpage):
 		self.webpage = webpage
 		self.cache = InfoCache()
