@@ -4,6 +4,7 @@ class Comment:
 		self.comment = ""
 		self.commentRating = 0
 		self.flaggedWordRatings = [] #A list of tuples containg index of word in comment and it's rating
+		self.flaggedPhraseRatings = [] #A list of tuples containg index of phrase in comment and it's rating
 
 	def set_comment(self, comment):
 		self.comment = comment
@@ -11,16 +12,27 @@ class Comment:
 	def set_comment_rating(self, commentRating):
 		self.commentRating = commentRating
 
-	def set_flagged_word_ratings(self, flaggedWordRatings):
+	def add_flagged_word(self, word, index, flaggedWordRatings):
 		self.flaggedWordRatings = flaggedWordRating
+		self.word = word
+		self.index = index
+
+	def add_flagged_phrase(self, phrase, index, flaggedPhraseRatings):
+		self.flaggedPhraseRatings = flaggedPhraseRatings
+		self.phrase = phrase
+		self.index = index
+
 	def get_comment(self):
 		return self.comment
 	
 	def get_comment_rating(self):
 		return self.commentRating
 	
-	def get_flagged_word_ratings(self):
+	def get_flagged_words(self):
 		return self.flaggedWordRatings
+	
+	def get_flagged_phrases(self):
+		return self.flaggedPhraseRatings
  
 class AnalysisCache: 
 	#Holds all comment caches for a particular info page
@@ -34,13 +46,13 @@ class AnalysisCache:
 		return self.comment
 	
 class SearchAnalysis:
-	def __init__(self, resultCache):
-		self.resultCache = resultCache
+	def __init__(self, comments):
+		self.comments = comments
 		
 		#Single Words
 
 		#Contains a list of common good words in torrent comments with their respective worth (1-10)
-		self.goodWordList = [("appreciate", 5), ("awesome", 5), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3), ("nice", 3), ("thank", 6)]
+		self.goodWordList = [("amazing", 5), ("appreciate", 5), ("awesome", 5), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3), ("nice", 3), ("thank", 6), ("thanx", 6)]
 
 		#Contains a list of common bad words in torrent comments with their respective worth (-1-(-10))
 		self.badWordList = [("awful", -5), ("bad", -4), ("cam", -1), ("crap", -3), ("fuck", -2), ("fucking", -2), ("horrible", -5), ("malware", -8), ("shit", -2), ("terrible", -5), ("trojan", -8), ("virus", -8)]
@@ -72,7 +84,7 @@ class SearchAnalysis:
 			if values == True:
 				unpackedList.append(word[1])
 			else:
-				unpackeList.append(word[0])
+				unpackedList.append(word[0])
 		return unpackedList
 
 	def levenshtein(self, seq1, seq2):
@@ -89,3 +101,42 @@ class SearchAnalysis:
 				thisrow[y] = min(delcost, addcost, subcost)
 	    	return thisrow[len(seq2) - 1]
 	
+	def _get_tolerance(self, seq):
+		return len(seq) * .3
+
+	def analyze_comment(self, commentString):
+		comment = Comment()
+		wordArray = commentString.split(" ")
+		commentRating = 0
+		flaggedWordList = []
+		flaggedPhraseList = []
+		comment.set_comment(commentString)
+		commentString = commentString.lower().strip()
+		badPhrases = self._unpack_list("bad phrases", False)
+		badPhrasesWeight = self._unpack_list("bad phrases", True)
+		goodPhrases = self._unpack_list("good phrases", False)
+		goodPhrasesWeight = self._unpack_list("good phrases", True)
+		badWords = self._unpack_list("bad words", False)
+		badWordsWeight = self._unpack_list("bad words", True)
+		goodWords = self._unpack_list("good words", False)
+		goodWordsWeight = self._unpack_list("good words", True)
+
+		for i in range(0, len(badPhrases)):
+			if badPhrases[i] in commentString:
+				index = commentString.index(badPhrases[i])
+				comment.add_flagged_phrase(badPhrases[i], index, badPhrasesWeight[i])	
+		for j in range(0, len(goodPhrases)):
+			if goodPhrases[j] in commentString:
+				index = commentString.index(goodPhrases[j])
+				comment.add_flagged_phrase(goodPhrases[j], index, goodPhrasesWeight[j])	
+		
+		for k in range(0, len(goodWords)):
+			index = 0
+			for l in range(0, len(wordArray)):
+				index += len(wordArray[l])
+				sanitized = wordArray[l].replace('!','').replace('?','').replace(',','').replace('.','').replace('.','') 
+				if self.levenshtein(sanitized, goodWords[k]) < self._get_tolerance(goodWords[k]):
+					index -= len(wordArray[l])
+					index += l
+					print wordArray[l]
+					print index
