@@ -41,7 +41,7 @@ class CommentAnalysis:
 		#Single Words
 
 		#Contains a list of common good words in torrent comments with their respective worth (1-10)
-		self.goodWordList = [("amazing", 5), ("appreciate", 5), ("awesome", 5), ("enjoyed", 4), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3),("like", 3), ("nice", 3), ("thank", 6), ("thanks", 6), ("thanx", 6)]
+		self.goodWordList = [("amazing", 5), ("appreciate", 5), ("awesome", 5), ("enjoyed", 4), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3),("like", 3), ("nice", 3), ("thank", 6)]
 
 		#Contains a list of common bad words in torrent comments with their respective worth (-1-(-10))
 		self.badWordList = [("awful", -5), ("bad", -4), ("cam", -1), ("crap", -3), ("fuck", -2), ("fucking", -2), ("horrible", -5), ("malware", -8), ("shit", -2), ("trojan", -8), ("virus", -8)]
