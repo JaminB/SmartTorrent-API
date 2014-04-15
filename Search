@@ -19,6 +19,7 @@ def GET():
 		buildCache.build_cache()
 		cache = buildCache.get_cache()
 		cache.de_duplicate_cache()
+		cache.analyze_comments()
 		json = cache.to_json()
 		lines = json.split('\n')
 		for line in lines:
