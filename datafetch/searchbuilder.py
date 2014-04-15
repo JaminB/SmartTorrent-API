@@ -10,7 +10,7 @@ from parsers import KickAssInfoLinkParser
 from parsers import PirateBaySearchParser
 from parsers import PirateBayInfoLinkParser
 from webpage import PirateBayURLBuilder
-
+from analysis import CommentAnalysis
 
 class ResultCache:
 	#Object to hold all data relevant to search including metadata such as comments, languages, and number of files
@@ -22,6 +22,8 @@ class ResultCache:
 		self.sizes = []
 		self.infoLinks = []
 		self.comments = []
+		self.overallRating = []
+		self.commentAnalysis = []
 		self.languages = []
 		self.numberOfFilesList = []
 	
@@ -111,7 +113,21 @@ class ResultCache:
 		#for title in self.titles:
 		#	print title
 		
-		
+	def analyze_comments(self):
+		for commentList in self.comments:
+			analyzedCommentsBlock = []
+			overallRating = 0
+			for comment in commentList:
+				analyze = CommentAnalysis(comment)
+				analyze.build_cache()
+				overallRating += analyze.get_cache().get_comment_rating()
+				analyzedCommentsBlock.append((analyze.get_cache().get_comment(), analyze.get_cache().get_comment_rating(), analyze.get_cache().get_flagged_words(), analyze.get_cache().get_flagged_phrases()))
+			self.commentAnalysis.append(analyzedCommentsBlock)
+			self.overallRating.append(overallRating)
+
+			
+
+
 	def add_magnet_link(self, magnetLink):
 		self.magnetLinks.append(magnetLink)
 	
@@ -167,7 +183,7 @@ class ResultCache:
 		return self.numberOfFilesList
 	
 	def to_json(self):
-		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.comments},sort_keys=True, indent=4)
+		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.commentAnalysis, "rating": self.overallRating},sort_keys=True, indent=4)
 
 
 class Search:
