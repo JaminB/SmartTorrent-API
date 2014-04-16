@@ -124,22 +124,20 @@ class CommentAnalysis:
 		for k in range(0, len(goodWords)):
 			index = 0
 			for l in range(0, len(wordArray)):
-				index += len(wordArray[l])
-				sanitized = re.sub(r'[^\w]', ' ', wordArray[l]).lower().strip()#wordArray[l].replace('!','').replace('?','').replace(',','').replace('.','').replace('.','').stripi()
+				sanitized = re.sub(r'[^\w]', ' ', wordArray[l]).lower().strip()
 				if self.levenshtein(sanitized, goodWords[k]) < self._get_tolerance(goodWords[k]):
-					index -= len(wordArray[l])
-					index += l;
 					self.commentAnalysis.add_flagged_word(wordArray[l], index, goodWordsWeight[k])
+				index += 1 #Add one to index space
+				index += len(wordArray[l])
 		for m in range(0, len(badWords)):
 			index = 0
 			for n in range(0, len(wordArray)):
 				index += len(wordArray[n])
-				sanitized = re.sub(r'[^\w]', ' ', wordArray[n]).lower().strip()#wordArray[n].replace('!','').replace('?','').replace(',','').replace('.','').replace('.','').strip()
-				
+				sanitized = re.sub(r'[^\w]', ' ', wordArray[n]).lower().strip()
 				if self.levenshtein(sanitized, badWords[m]) < self._get_tolerance(badWords[m]):
-					index -= len(wordArray[n])
-					index += l;
 					self.commentAnalysis.add_flagged_word(wordArray[n], index, badWordsWeight[m])
+				index += 1 #Add one to index space
+				index += len(wordArray[l])
 		flaggedWords = self.commentAnalysis.get_flagged_words()
 		flaggedPhrases = self.commentAnalysis.get_flagged_phrases()
 		for word in flaggedWords:
@@ -147,8 +145,6 @@ class CommentAnalysis:
 		for phrase in flaggedPhrases:
 			commentRating += phrase[2]
 		self.commentAnalysis.set_comment_rating(commentRating)
-		#print self.commentAnalysis.get_comment_rating()
-		#print self.commentAnalysis.get_flagged_words()	
 	
 	def get_cache(self):
 		return self.commentAnalysis
