@@ -116,17 +116,20 @@ class CommentAnalysis:
 		for i in range(0, len(badPhrases)):
 			if badPhrases[i] in self.comment:
 				index = self.comment.index(badPhrases[i])
-				self.commentAnalysis.add_flagged_phrase(badPhrases[i], index, badPhrasesWeight[i])	
+				phraseLocation = str(index) + ":" + str(index + len(badPhrases[i]))
+				self.commentAnalysis.add_flagged_phrase(badPhrases[i], phraseLocation, badPhrasesWeight[i])	
 		for j in range(0, len(goodPhrases)):
 			if goodPhrases[j] in self.comment:
 				index = self.comment.index(goodPhrases[j])
-				self.commentAnalysis.add_flagged_phrase(goodPhrases[j], index, goodPhrasesWeight[j])		
+				phraseLocation = str(index) + ":" + str(index + len(goodPhrases[j]))
+				self.commentAnalysis.add_flagged_phrase(goodPhrases[j], phraseLocation, goodPhrasesWeight[j])		
 		for k in range(0, len(goodWords)):
 			index = 0
 			for l in range(0, len(wordArray)):
 				sanitized = re.sub(r'[^\w]', ' ', wordArray[l]).lower().strip()
 				if self.levenshtein(sanitized, goodWords[k]) < self._get_tolerance(goodWords[k]):
-					self.commentAnalysis.add_flagged_word(wordArray[l], index, goodWordsWeight[k])
+					wordLocation = str(index) + ":" + str(index + len(wordArray[l]))	
+					self.commentAnalysis.add_flagged_word(wordArray[l], wordLocation, goodWordsWeight[k])
 				index += 1 #Add one to index space
 				index += len(wordArray[l])
 		for m in range(0, len(badWords)):
@@ -135,7 +138,8 @@ class CommentAnalysis:
 				index += len(wordArray[n])
 				sanitized = re.sub(r'[^\w]', ' ', wordArray[n]).lower().strip()
 				if self.levenshtein(sanitized, badWords[m]) < self._get_tolerance(badWords[m]):
-					self.commentAnalysis.add_flagged_word(wordArray[n], index, badWordsWeight[m])
+					wordLocation = str(index) + ":" + str(index + len(wordArray[n]))
+					self.commentAnalysis.add_flagged_word(wordArray[n], wordLocation, badWordsWeight[m])
 				index += 1 #Add one to index space
 				index += len(wordArray[l])
 		flaggedWords = self.commentAnalysis.get_flagged_words()
