@@ -34,6 +34,10 @@ class Comment:
 	
 	def get_flagged_phrases(self):
 		return self.flaggedPhraseRatings
+
+class Signatures:
+	def __init__(self):
+		print "test"
  
 class CommentAnalysis:
 	def __init__(self, comment):
@@ -96,7 +100,6 @@ class CommentAnalysis:
 		return len(seq) * .3
 
 	def build_cache(self):
-		#print "input: " + self.comment
 		wordArray = self.comment.split(" ")
 		commentRating = 0
 		flaggedWordList = []
@@ -147,7 +150,7 @@ class CommentAnalysis:
 		flaggedWords = self.commentAnalysis.get_flagged_words()
 		flaggedPhrases = self.commentAnalysis.get_flagged_phrases()
 		for word in flaggedWords:
-			commentRating += word[2]
+			commentRating += word[3]
 		for phrase in flaggedPhrases:
 			commentRating += phrase[2]
 		self.commentAnalysis.set_comment_rating(commentRating)
