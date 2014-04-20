@@ -7,7 +7,7 @@ class Comment:
 		self.flaggedWordRatings = [] #A list of tuples containg index of word in comment and it's rating
 		self.contextWordRatings = []
 		self.correctWords = [] #A list containing the correct spelling of the flagged word
-	
+		self.signatures = []
 	def __str__(self):
 		return str((self.comment, self.commentRating, self.flaggedWordRatings, self.contextWordRatings))
 	def set_comment(self, comment):
@@ -24,6 +24,9 @@ class Comment:
 		contextWord = (word, correctWord, index, indexEnd, contentWordWeight)
 		self.contextWordRatings.append(contextWord)
 
+	def add_signature(self, signature):
+		self.signatures.append(signature)
+
 	def get_comment(self):
 		return self.comment
 	
@@ -36,34 +39,78 @@ class Comment:
 	def get_context_words(self):
 		return self.contextWordRatings
 	
+	def get_signatures(self):
+		return self.signatures
+	
 
 class Signatures:
 	def __init__(self, wordList):
-		self.wordList = wordList.get_flagged_words()
+		self.wordList = wordList
+		self.negaters = ["no", "nor", "not"]
 		self.badAdjectives = ["awful", "bad", "low", "horrible", "shit", "terrible"]
-		self.goodAdjectives = ["amazing", "awesome", "excellent", "high", "incredible" "nice"]
-		self.nouns = ["album", "content", "mix", "cd", "movie", "music", "video", "quallity"]
-		
+		self.goodAdjectives = ["amazing", "awesome", "best", "excellent", "great", "high", "incredible" "nice"]
+		self.nouns = ["album", "content", "copy", "mix", "cd", "movie", "music", "song", "video", "quality"]
+
 
 	def sig_cease_and_decist(self):
+		flaggedWords = self.wordList.get_flagged_words()
 		score = 0
-		for element in self.wordList:
-			if element[1] == "cease" or element[1] == "decist" or element[1] == "letter" or element[1] == "isp":
+		for element in flaggedWords:
+			if element[1] == "cease" or element[1] == "decist" or element[1] == "letter" or element[1] == "isp" or element[1] == "watched" or element[1] == "tracked":
 				score +=1
 		if score > 1:
 			return True
 		return False
 
-	def sig_bad_quallity(self):
+	def sig_bad_quality(self):
 		correctlySpelled = []
-		for element in self.wordList:
-			correctlySpelled.append(element[1]) 
-		if "quallity" in correctlySpelled or "rip" in correctlySpelled or "version" in correctlySpelled:
-			for word in correctlySpelled:
-				if word in self.badAdjectives:
-					return True
+		adjectiveFound = False
+		contextFound = False
+		for element in self.wordList.get_flagged_words():
+			correctlySpelled.append(element[1])
+		
+		for element in self.wordList.get_context_words():
+			correctlySpelled.append(element[1])
+		
+		for word in correctlySpelled:
+			if word in self.badAdjectives:
+				adjectiveFound = True
+			if word in self.nouns:
+				contextFound = True
+		
+		if adjectiveFound and contextFound:
+			return True
+		return False	
+	def sig_good_quality(self):
+		correctlySpelled = []
+		adjectiveFound = False
+		contextFound = False
+		for element in self.wordList.get_flagged_words():
+			correctlySpelled.append(element[1])
+		
+		for element in self.wordList.get_context_words():
+			correctlySpelled.append(element[1])
+		
+		for word in correctlySpelled:
+			if word in self.goodAdjectives:
+				adjectiveFound = True
+			if word in self.nouns:
+				contextFound = True
+		if adjectiveFound and contextFound:
+			return True
 		return False
 
+	def sig_malware(self):
+		correctlySpelled = []
+		for element in self.wordList.get_flagged_words():
+			correctlySpelled.append(element[1])
+		
+		for element in self.wordList.get_context_words():
+			correctlySpelled.append(element[1])
+	
+		if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
+			return True
+		return False
 		
 class CommentAnalysis:
 	def __init__(self, comment):
@@ -72,11 +119,11 @@ class CommentAnalysis:
 		#Single Words
 
 		#Contains a list of common good words in torrent comments with their respective worth (1-10)
-		self.goodWordList = [("amazing", 5), ("appreciate", 5), ("awesome", 5), ("enjoyed", 4), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3), ("like", 3), ("love", 4), ("nice", 3), ("outstanding", 6), ("perfect", 6), ("thanks", 6)]
+		self.goodWordList = [("amazing", 5), ("appreciate", 5), ("awesome", 5), ("best", 6), ("enjoyed", 4), ("excellent", 6), ("good", 4), ("great", 5), ("incredible", 3), ("like", 3), ("love", 4), ("nice", 3), ("outstanding", 6), ("perfect", 6), ("thanks", 6)]
 
 
 		#Contains a list of common bad words in torrent comments with their respective worth (-1-(-10))
-		self.badWordList = [("awful", -5), ("bad", -4), ("cam", -1), ("cease", 0), ("crap", -3), ("botnet", -5), ("decist", 0), ("fuck", -2), ("fucking", -2), ("letter", 0), ("horrible", -5), ("isp", -9), ("malware", -8), ("shit", -2), ("trojan", -8), ("virus", -8)]
+		self.badWordList = [("awful", -5), ("bad", -4), ("cam", -1), ("cease", 0), ("crap", -3), ("botnet", -5), ("decist", 0), ("fuck", -2), ("fucking", -2), ("letter", 0), ("horrible", -5), ("isp", -9), ("malware", -8), ("shit", -2), ("tracked", -2), ("trojan", -8), ("virus", -8), ("watched", -2)]
 
 		#Words that add contextual support with their respective multiplier
 		self.contextList = [ ("album",0), ("copy", 0), ("download", 0), ("movie", 0), ("quality", 0), ("rip", 0), ("software", 0), ("song", 0), ("torrent", 0), ("upload", 0), ("version", 0)] 
@@ -138,6 +185,8 @@ class CommentAnalysis:
 				sanitized = re.sub(r'[^\w]', ' ', wordArray[j]).lower().strip()
 				if self.levenshtein(sanitized, contextWords[i]) < self._get_tolerance(contextWords[i]):
 					self.commentAnalysis.add_context_word(wordArray[j], contextWords[i], index, index + len(wordArray[j]), contextWordsWeight[i])
+				index += 1 #Add one to index space
+				index += len(wordArray[j])
 		for k in range(0, len(goodWords)):
 			index = 0
 			for l in range(0, len(wordArray)):
@@ -158,7 +207,19 @@ class CommentAnalysis:
 		flaggedWords = self.commentAnalysis.get_flagged_words()
 		for word in flaggedWords:
                 	commentRating += word[4]
+		#Signatures
+
+		signatures = Signatures(self.commentAnalysis)
+		if signatures.sig_cease_and_decist():
+			self.commentAnalysis.add_signature("Monitored Torrent")
+		if signatures.sig_good_quality():
+			self.commentAnalysis.add_signature("Good Quality Torrent")
+		if signatures.sig_bad_quality():
+			self.commentAnalysis.add_signature("Bad Quality Torrent")
+		if signatures.sig_malware():
+			self.commentAnalysis.add_signature("Malware")
+		
 		self.commentAnalysis.set_comment_rating(commentRating)
-	
+			
 	def get_cache(self):
 		return self.commentAnalysis
