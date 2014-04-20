@@ -49,7 +49,7 @@ class Signatures:
 		self.negaters = ["no", "nor", "not"]
 		self.badAdjectives = ["awful", "bad", "low", "horrible", "shit", "terrible"]
 		self.goodAdjectives = ["amazing", "awesome", "best", "excellent", "great", "high", "incredible" "nice"]
-		self.nouns = ["album", "content", "copy", "mix", "cd", "movie", "music", "song", "video", "quality"]
+		self.nouns = ["album", "content", "copy", "mix", "cd", "movie", "music", "quality", "song", "video", "torrent"]
 
 
 	def sig_cease_and_decist(self):
