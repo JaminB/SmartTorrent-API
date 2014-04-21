@@ -142,7 +142,8 @@ class CommentAnalysis:
 		self.badWordList = [("avoid", -3), ("awful", -5), ("bad", -4), ("cam", -1), ("cease", 0), ("crap", -3), ("botnet", -5), ("decist", 0), ("fuck", -2), ("fucking", -2), ("letter", 0), ("horrible", -5), ("isp", -9), ("malware", -8), ("shit", -2), ("tracked", -2), ("trojan", -8), ("virus", -8), ("watched", -2)]
 
 		#Words that add contextual support with their respective multiplier
-		self.contextList = [ ("album",0), ("copy", 0), ("download", 0), ("movie", 0), ("quality", 0), ("rip", 0), ("software", 0), ("song", 0), ("torrent", 0), ("upload", 0), ("version", 0)] 
+		self.contextList = [ ("album",0), ("audio", 0), ("copy", 0), ("download", 0), ("movie", 0), ("quality", 0), ("rip", 0), ("software", 0), ("song", 0), ("sound", 0), ("torrent", 0), ("upload", 0), ("version", 0), ("video", 0)] 
+
 
 	def _unpack_list(self, listType, values):
 		unpackedList = []
