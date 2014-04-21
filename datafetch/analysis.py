@@ -48,69 +48,85 @@ class Signatures:
 		self.wordList = wordList
 		self.negaters = ["no", "nor", "not"]
 		self.badAdjectives = ["awful", "bad", "low", "horrible", "shit", "terrible"]
-		self.goodAdjectives = ["amazing", "awesome", "best", "excellent", "great", "high", "incredible" "nice"]
+		self.goodAdjectives = ["amazing", "awesome", "best", "excellent", "good", "great", "high", "incredible" "nice"]
 		self.nouns = ["album", "content", "copy", "mix", "cd", "movie", "music", "quality", "song", "video", "torrent"]
 
 
 	def sig_cease_and_decist(self):
 		flaggedWords = self.wordList.get_flagged_words()
 		score = 0
+		indexes = []
 		for element in flaggedWords:
 			if element[1] == "cease" or element[1] == "decist" or element[1] == "letter" or element[1] == "isp" or element[1] == "watched" or element[1] == "tracked":
 				score +=1
+				indexes.append(element[2])
+				indexes.append(element[3])
 		if score > 1:
-			return True
-		return False
+			return ("Monitored Torrent", min(indexes), max(indexes), -15)
+		return ("Monitored Torrent", -1, -1, 0)
 
 	def sig_bad_quality(self):
 		correctlySpelled = []
 		adjectiveFound = False
 		contextFound = False
+		indexes = []
 		for element in self.wordList.get_flagged_words():
 			correctlySpelled.append(element[1])
-		
+			indexes.append(element[2])
+			indexes.append(element[3])
 		for element in self.wordList.get_context_words():
 			correctlySpelled.append(element[1])
-		
+			indexes.append(element[2])
+			indexes.append(element[3])
 		for word in correctlySpelled:
 			if word in self.badAdjectives:
 				adjectiveFound = True
 			if word in self.nouns:
 				contextFound = True
-		
-		if adjectiveFound and contextFound:
-			return True
-		return False	
+		if len(indexes) > 0:	
+			if adjectiveFound and contextFound:
+				return ("Bad Quality", min(indexes), max(indexes), -10)
+		return ("Bad Quality", -1, -1, 0)
 	def sig_good_quality(self):
 		correctlySpelled = []
 		adjectiveFound = False
 		contextFound = False
+		indexes = []
 		for element in self.wordList.get_flagged_words():
 			correctlySpelled.append(element[1])
-		
+			indexes.append(element[2])
+			indexes.append(element[3])
 		for element in self.wordList.get_context_words():
 			correctlySpelled.append(element[1])
-		
+			indexes.append(element[2])
+			indexes.append(element[3])
 		for word in correctlySpelled:
 			if word in self.goodAdjectives:
 				adjectiveFound = True
 			if word in self.nouns:
 				contextFound = True
-		if adjectiveFound and contextFound:
-			return True
-		return False
+
+		if len(indexes) > 0:
+			if adjectiveFound and contextFound:
+				return ("Good Quality", min(indexes), max(indexes), 10)
+		return ("Good Quality", -1, -1, 0)
 
 	def sig_malware(self):
 		correctlySpelled = []
+		indexes = []
 		for element in self.wordList.get_flagged_words():
 			correctlySpelled.append(element[1])
-		
+			indexes.append(element[2])
+			indexes.append(element[3])
 		for element in self.wordList.get_context_words():
 			correctlySpelled.append(element[1])
+			indexes.append(element[2])
+			indexes.append(element[3])
 	
-		if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
-			return True
-		return False
+		if len(indexes) > 0:
+			if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
+				return ("Malware Detected", min(indexes), max(indexes), -15)
+		return (-1, -1, 0)
 		
 class CommentAnalysis:
 	def __init__(self, comment):
@@ -165,59 +181,59 @@ class CommentAnalysis:
 
 	def build_cache(self):
 		wordArray = self.comment.split(" ")
-		commentRating = 0
-		flaggedWordList = []
-		self.commentAnalysis.set_comment(self.comment)
-		self.comment = self.comment.lower().strip()
-		contextWords = self._unpack_list("context words", False)
-		contextWordsWeight = self._unpack_list("context words", True)
-		badWords = self._unpack_list("bad words", False)
-		badWordsWeight = self._unpack_list("bad words", True)
-		goodWords = self._unpack_list("good words", False)
-		goodWordsWeight = self._unpack_list("good words", True)
-		badWords = self._unpack_list("bad words", False)
-		badWordsWeight = self._unpack_list("bad words",True)
-					
-			
-		for i in range(0, len(contextWords)):
-			index = 0
-			for j in range(0, len(wordArray)):
-				sanitized = re.sub(r'[^\w]', ' ', wordArray[j]).lower().strip()
-				if self.levenshtein(sanitized, contextWords[i]) < self._get_tolerance(contextWords[i]):
-					self.commentAnalysis.add_context_word(wordArray[j], contextWords[i], index, index + len(wordArray[j]), contextWordsWeight[i])
-				index += 1 #Add one to index space
-				index += len(wordArray[j])
-		for k in range(0, len(goodWords)):
-			index = 0
-			for l in range(0, len(wordArray)):
-				sanitized = re.sub(r'[^\w]', ' ', wordArray[l]).lower().strip()
-				if self.levenshtein(sanitized, goodWords[k]) < self._get_tolerance(goodWords[k]):
-					self.commentAnalysis.add_flagged_word(wordArray[l], goodWords[k], index, index + len(wordArray[l]), goodWordsWeight[k])
-				index += 1 #Add one to index space
-				index += len(wordArray[l])
-		for m in range(0, len(badWords)):
-			index = 0
-			for n in range(0, len(wordArray)):
-				index += len(wordArray[n])
-				sanitized = re.sub(r'[^\w]', ' ', wordArray[n]).lower().strip()
-				if self.levenshtein(sanitized, badWords[m]) < self._get_tolerance(badWords[m]):
-					self.commentAnalysis.add_flagged_word(wordArray[n], badWords[m], index, index + len(wordArray[n]), badWordsWeight[m])
-				index += 1 #Add one to index space
-				index += len(wordArray[l])
-		flaggedWords = self.commentAnalysis.get_flagged_words()
-		for word in flaggedWords:
-                	commentRating += word[4]
+                commentRating = 0
+                flaggedWordList = []
+                self.commentAnalysis.set_comment(self.comment)
+                self.comment = self.comment.lower().strip()
+                contextWords = self._unpack_list("context words", False)
+                contextWordsWeight = self._unpack_list("context words", True)
+                badWords = self._unpack_list("bad words", False)
+                badWordsWeight = self._unpack_list("bad words", True)
+                goodWords = self._unpack_list("good words", False)
+                goodWordsWeight = self._unpack_list("good words", True)
+                badWords = self._unpack_list("bad words", False)
+                badWordsWeight = self._unpack_list("bad words",True)
+
+
+                for i in range(0, len(contextWords)):
+                        index = 0
+                        for j in range(0, len(wordArray)):
+                                sanitized = re.sub(r'[^\w]', ' ', wordArray[j]).lower().strip()
+                                if self.levenshtein(sanitized, contextWords[i]) < self._get_tolerance(contextWords[i]):
+                                        self.commentAnalysis.add_context_word(wordArray[j], contextWords[i], index, index + len(wordArray[j]), contextWordsWeight[i])
+                                index += 1 #Add one to index space
+                                index += len(wordArray[j])
+                for k in range(0, len(goodWords)):
+                        index = 0
+                        for l in range(0, len(wordArray)):
+                                sanitized = re.sub(r'[^\w]', ' ', wordArray[l]).lower().strip()
+                                if self.levenshtein(sanitized, goodWords[k]) < self._get_tolerance(goodWords[k]):
+                                        self.commentAnalysis.add_flagged_word(wordArray[l], goodWords[k], index, index + len(wordArray[l]), goodWordsWeight[k])
+                                index += 1 #Add one to index space
+                                index += len(wordArray[l])
+                for m in range(0, len(badWords)):
+                        index = 0
+                        for n in range(0, len(wordArray)):
+                                sanitized = re.sub(r'[^\w]', ' ', wordArray[n]).lower().strip()
+                                if self.levenshtein(sanitized, badWords[m]) < self._get_tolerance(badWords[m]):
+                                        self.commentAnalysis.add_flagged_word(wordArray[n], badWords[m], index, index + len(wordArray[n]), badWordsWeight[m])
+                                index += 1 #Add one to index space
+                                index += len(wordArray[n])
+                flaggedWords = self.commentAnalysis.get_flagged_words()
+                for word in flaggedWords:
+                        commentRating += word[4]
+
 		#Signatures
 
 		signatures = Signatures(self.commentAnalysis)
-		if signatures.sig_cease_and_decist():
-			self.commentAnalysis.add_signature("Monitored Torrent")
-		if signatures.sig_good_quality():
-			self.commentAnalysis.add_signature("Good Quality Torrent")
-		if signatures.sig_bad_quality():
-			self.commentAnalysis.add_signature("Bad Quality Torrent")
-		if signatures.sig_malware():
-			self.commentAnalysis.add_signature("Malware")
+		if signatures.sig_cease_and_decist()[1] != -1:
+			self.commentAnalysis.add_signature(signatures.sig_cease_and_decist())
+		if signatures.sig_good_quality()[1] != -1:
+			self.commentAnalysis.add_signature(signatures.sig_good_quality())
+		if signatures.sig_bad_quality()[1] != -1:
+			self.commentAnalysis.add_signature(signatures.sig_bad_quality())
+		if signatures.sig_malware()[1] != -1:
+			self.commentAnalysis.add_signature(signatures.sig_malware())
 		
 		self.commentAnalysis.set_comment_rating(commentRating)
 			
