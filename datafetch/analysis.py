@@ -177,7 +177,7 @@ class CommentAnalysis:
 	    	return thisrow[len(seq2) - 1]
 	
 	def _get_tolerance(self, seq):
-		return len(seq) * .3
+		return len(seq) * .25
 
 	def build_cache(self):
 		wordArray = self.comment.split(" ")
