@@ -139,7 +139,7 @@ class CommentAnalysis:
 
 
 		#Contains a list of common bad words in torrent comments with their respective worth (-1-(-10))
-		self.badWordList = [("awful", -5), ("bad", -4), ("cam", -1), ("cease", 0), ("crap", -3), ("botnet", -5), ("decist", 0), ("fuck", -2), ("fucking", -2), ("letter", 0), ("horrible", -5), ("isp", -9), ("malware", -8), ("shit", -2), ("tracked", -2), ("trojan", -8), ("virus", -8), ("watched", -2)]
+		self.badWordList = [("avoid", -3), ("awful", -5), ("bad", -4), ("cam", -1), ("cease", 0), ("crap", -3), ("botnet", -5), ("decist", 0), ("fuck", -2), ("fucking", -2), ("letter", 0), ("horrible", -5), ("isp", -9), ("malware", -8), ("shit", -2), ("tracked", -2), ("trojan", -8), ("virus", -8), ("watched", -2)]
 
 		#Words that add contextual support with their respective multiplier
 		self.contextList = [ ("album",0), ("copy", 0), ("download", 0), ("movie", 0), ("quality", 0), ("rip", 0), ("software", 0), ("song", 0), ("torrent", 0), ("upload", 0), ("version", 0)] 
@@ -228,12 +228,16 @@ class CommentAnalysis:
 		signatures = Signatures(self.commentAnalysis)
 		if signatures.sig_cease_and_decist()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_cease_and_decist())
+			commentRating += signatures.sig_cease_and_decist()[3]
 		if signatures.sig_good_quality()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_good_quality())
+			commentRating += signatures.sig_good_quality()[3]
 		if signatures.sig_bad_quality()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_bad_quality())
+			commentRating += signatures.sig_bad_quality()[3]
 		if signatures.sig_malware()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_malware())
+			commentRating += signatures.sig_malware()[3]
 		
 		self.commentAnalysis.set_comment_rating(commentRating)
 			
