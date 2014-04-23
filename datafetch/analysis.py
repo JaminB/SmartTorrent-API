@@ -232,7 +232,12 @@ class CommentAnalysis:
 		self.badWordList = wordlist.get_bad_words_weighted()
 
 		#Words that add contextual support with their respective multiplier
+<<<<<<< HEAD
 		self.contextList = wordlist.get_neutral_words_weighted()
+=======
+		self.contextList = [ ("album",0), ("audio", 0), ("copy", 0), ("download", 0), ("movie", 0), ("quality", 0), ("rip", 0), ("software", 0), ("song", 0), ("sound", 0), ("torrent", 0), ("upload", 0), ("version", 0), ("video", 0)] 
+
+>>>>>>> 1017ba3a51820376dccc8c3fda2062ae53cd45c7
 
 	def _unpack_list(self, listType, values):
 		unpackedList = []
