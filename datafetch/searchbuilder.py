@@ -121,7 +121,7 @@ class ResultCache:
 				analyze = CommentAnalysis(comment)
 				analyze.build_cache()
 				overallRating += analyze.get_cache().get_comment_rating()
-				analyzedCommentsBlock.append((analyze.get_cache().get_comment(), analyze.get_cache().get_comment_rating(), analyze.get_cache().get_flagged_words(), analyze.get_cache().get_context_words(), analyze.get_cache().get_signatures()))
+				analyzedCommentsBlock.append((analyze.get_cache().get_comment(), analyze.get_cache().get_comment_rating(), analyze.get_cache().get_flagged_words(), analyze.get_cache().get_neutral_words(), analyze.get_cache().get_signatures()))
 			self.commentAnalysis.append(analyzedCommentsBlock)
 			self.overallRating.append(overallRating)
 
