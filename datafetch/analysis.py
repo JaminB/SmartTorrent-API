@@ -228,7 +228,7 @@ class Signatures:
 						if int(weight[i]) > 5:
 							rating += int(weight[i])
 						else:
-							rating -= 10 - int(weight[i])
+							rating -= (10 - int(weight[i]))
 		else:
 			for i in range(0, len(weight)):
 				if contentType[i] not in markedWords:
@@ -237,7 +237,7 @@ class Signatures:
 						if int(weight[i]) > 5:
 							rating += int(weight[i])
 						else:
-							rating -= 10 - int(weight[i])
+							rating -= (10 - int(weight[i]))
 
 		if len(indexes) > 0:
 				if digitFound and keyFound:
