@@ -204,14 +204,18 @@ class Signatures:
 		rating = 0
 		contentType = []
 		indexes = []
+		digitFound = False
+		keyFound = False
 		markedWords = []
 		neutralWords = self.comment.get_neutral_words()
 		for element in neutralWords:
 			if element[1].isdigit():
+				digitFound = True
 				weight.append(element[1])
 				indexes.append(element[2])
 				indexes.append(element[3])
 			if element[1] == "audio" or element[1] == "video":
+				keyFound = True
 				contentType.append(element[1])
 				indexes.append(element[2])
 				indexes.append(element[3])
@@ -236,7 +240,8 @@ class Signatures:
 							rating -= int(weight[i])
 
 		if len(indexes) > 0:
-				return ("Content Rating", min(indexes), max(indexes), rating)
+				if digitFound and keyFound:
+					return ("Content Rating", min(indexes), max(indexes), rating)
 		return (-1, -1, 0)
 		
 	def sig_malware(self):
