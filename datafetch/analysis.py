@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import re
-
 class Wordlist:
 	def __init__(self):
 		self.goodAdjs = []
@@ -199,7 +198,47 @@ class Signatures:
 			if adjectiveFound and contextFound:
 				return ("Good Quality", min(indexes), max(indexes), 10)
 		return ("Good Quality", -1, -1, 0)
+	
+	def sig_rated_content(self):
+		weight = []
+		rating = 0
+		contentType = []
+		indexes = []
+		markedWords = []
+		neutralWords = self.comment.get_neutral_words()
+		for element in neutralWords:
+			if element[1].isdigit():
+				weight.append(element[1])
+				indexes.append(element[2])
+				indexes.append(element[3])
+			if element[1] == "audio" or element[1] == "video":
+				contentType.append(element[1])
+				indexes.append(element[2])
+				indexes.append(element[3])
+		
+		if len(weight) >= len(contentType):
+			for i in range(0, len(contentType)):
+				if contentType[i] not in markedWords:
+					markedWords.append(contentType[i])
+					if int(weight[i]) < 11:
+						if int(weight[i]) > 5:
+							rating += int(weight[i])
+						else:
+							rating -= int(weight[i])
+		else:
+			for i in range(0, len(weight)):
+				if contentType[i] not in markedWords:
+					markedWords.append(contentType[i])
+					if int(weight[i]) < 11:
+						if int(weight[i]) > 5:
+							rating += int(weight[i])
+						else:
+							rating -= int(weight[i])
 
+		if len(indexes) > 0:
+				return ("Content Rating", min(indexes), max(indexes), rating)
+		return (-1, -1, 0)
+		
 	def sig_malware(self):
 		correctlySpelled = []
 		indexes = []
@@ -216,7 +255,7 @@ class Signatures:
 			if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
 				return ("Malware Detected", min(indexes), max(indexes), -15)
 		return (-1, -1, 0)
-		
+	#	
 class CommentAnalysis:
 	def __init__(self, comment):
 		wordlist = Wordlist()
@@ -328,7 +367,10 @@ class CommentAnalysis:
 		if signatures.sig_malware()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_malware())
 			commentRating += signatures.sig_malware()[3]
-		
+				
+		if signatures.sig_rated_content()[1] != -1:
+			self.commentAnalysis.add_signature(signatures.sig_rated_content())
+			commentRating += signatures.sig_rated_content()[3]
 		self.commentAnalysis.set_comment_rating(commentRating)
 			
 	def get_cache(self):
