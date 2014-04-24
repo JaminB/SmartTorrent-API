@@ -372,7 +372,6 @@ class CommentAnalysis:
 		if signatures.sig_malware()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_malware())
 			commentRating += signatures.sig_malware()[3]
-				
 		if signatures.sig_rated_content()[1] != -1:
 			self.commentAnalysis.add_signature(signatures.sig_rated_content())
 			commentRating += signatures.sig_rated_content()[3]
