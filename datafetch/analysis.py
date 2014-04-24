@@ -226,9 +226,9 @@ class Signatures:
 					markedWords.append(contentType[i])
 					if int(weight[i]) < 11:
 						if int(weight[i]) > 5:
-							rating += int(weight[i])
+							rating += 10 - int(weight[i])
 						else:
-							rating -= int(weight[i])
+							rating -= 10 - int(weight[i])
 		else:
 			for i in range(0, len(weight)):
 				if contentType[i] not in markedWords:

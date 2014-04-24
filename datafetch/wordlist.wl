@@ -15,6 +15,7 @@
 ~Bad_Adjectives:
 	awful
 	bad
+	garbage
 	horrible
 	low
 	shit
@@ -69,6 +70,7 @@
 	decist -1
 	fuck -2
 	fucking -2
+	garbage -3
 	horrible -5
 	isp -7
 	low -4
