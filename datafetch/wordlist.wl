@@ -2,10 +2,11 @@
 
 ~Good_Adjectives:
 	amazing
-	brilliant
+	awesome
 	awesome
 	beautiful
 	best
+	brilliant
 	excellent
 	fast
 	good
@@ -18,14 +19,17 @@
 ~Bad_Adjectives:
 	awful
 	bad
+	buggy
 	fake
 	garbage
 	horrible
 	low
 	shit
+	shitty
 	terrible
 
 ~Negators:
+	never
 	no
 	nor
 	not
@@ -49,6 +53,7 @@
 
 ~Good_Words:
 	amazing 5
+	awesome 4
 	appreciate 5
 	beautiful 5
 	brilliant 5
@@ -66,14 +71,16 @@
 	outstanding 6
 	perfect 6
 	thanks 6
+	top 2
 
 ~Bad_Words:
 	avoid -3
 	awful -5
 	bad -4
 	botnet -5
+	buggy -1
 	cam -1
-	cease -1
+	cease -1 
 	copyright -1
 	crap -3
 	decist -1
@@ -86,6 +93,7 @@
 	low -4
 	malware -8
 	shit -2
+	shitty -2
 	slow -3
 	tracked -2
 	trojan -8
@@ -97,7 +105,7 @@
 	1 0
 	2 0
 	3 0
-	4 0
+	4 0 
 	5 0
 	6 0
 	7 0

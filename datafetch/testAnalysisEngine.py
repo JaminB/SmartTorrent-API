@@ -3,12 +3,13 @@ from analysis import CommentAnalysis
 from analysis import Signatures
 from analysis import Wordlist
 
-analysis = CommentAnalysis("this v")
+analysis = CommentAnalysis("this is a good torrent really awesome")
 #print analysis._unpack_list("good phrases", True)
 analysis.build_cache()
 analysis.get_cache()
 signatures = Signatures(analysis.get_cache())
-print signatures.sig_rated_content()
+#print signatures.sig_rated_content()
+print signatures.get_good_adjs_in_comment()
 wordlist = Wordlist()
 #print wordlist.get_good_words_weighted()
 #print signatures.sig_cease_and_decist()

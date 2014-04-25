@@ -12,19 +12,43 @@ class Wordlist:
 		self._populate()
 	
 	def _populate(self):
-		f = open("wordlist.wl", "r")
+		try:
+			f = open("wordlist.wl", "r")
+		except IOError:
+			print "File Not Found Error: wordlist.wl cannot be found"
 		allWords = []
 		for line in f:
 			if line.strip() != "":
 				if "#" not in line:
 					allWords.append(line.strip())
-		loc_good_adjectives = allWords.index('~Good_Adjectives:') + 1	
-		loc_bad_adjectives = allWords.index('~Bad_Adjectives:') + 1	
-		loc_negators = allWords.index('~Negators:') + 1	
-		loc_context_nouns = allWords.index('~Context_Nouns:') + 1
-		loc_good_words = allWords.index('~Good_Words:') + 1
-		loc_bad_words = allWords.index('~Bad_Words:') + 1
-		loc_neutral_words = allWords.index('~Neutral_Words:') + 1
+		try:
+			loc_good_adjectives = allWords.index('~Good_Adjectives:') + 1	
+		except ValueError:
+			print "Content Error: wordlist.wl does not contain ~Good_Adjectives definition." 
+		try:
+			loc_bad_adjectives = allWords.index('~Bad_Adjectives:') + 1	
+		except ValueError:
+			print "Content Error: wordlist.wl does not contain ~Bad_Adjectives definition." 
+		try:
+			loc_negators = allWords.index('~Negators:') + 1	
+		except ValueError:
+			print "Content Error: wordlist.wl does not contain ~Negators definition." 
+		try:
+			loc_context_nouns = allWords.index('~Context_Nouns:') + 1
+		except ValueError:
+			print "Content Error: wordlist.wl does not contain ~Context_Nouns definition." 
+		try:	
+			loc_good_words = allWords.index('~Good_Words:') + 1
+		except ValueError:
+			print "Content Error: wordlist.wl does not contain ~Good_Words definition." 
+		try:	
+			loc_bad_words = allWords.index('~Bad_Words:') + 1
+		except:
+			print "Content Error: wordlist.wl does not contain ~Bad_Words definition." 
+		try:
+			loc_neutral_words = allWords.index('~Neutral_Words:') + 1
+		except:
+			print "Content Error: wordlist.wl does not contain ~Neutral_Words definition." 
 
 		for i in range(loc_good_adjectives, len(allWords)):
 			if "~" in allWords[i]:
@@ -50,20 +74,29 @@ class Wordlist:
 			if "~" in allWords[m]:
 				break
 			split = allWords[m].split(' ')
-			self.goodWords.append((split[0], int(split[1])))
+			try:
+				self.goodWords.append((split[0], int(split[1])))
+			except IndexError:
+				print "Incomplete definition in ~Good_Words: " + allWords[m] + " _ <---specify integer value"
 		
 		for n in range(loc_bad_words, len(allWords)):
 			if "~" in allWords[n]:
 				break
 			split = allWords[n].split(' ')
-			self.badWords.append((split[0], int(split[1])))
+			try:
+				self.badWords.append((split[0], int(split[1])))
+			except:
+				print "Incomplete definition in ~Bad_Words: " + allWords[n] + " _ <---specify integer value"
+
 		
 		for o in range(loc_neutral_words, len(allWords)):
 			if "~" in allWords[o]:
 				break
 			split = allWords[o].split(' ')
-			self.neutralWords.append((split[0], int(split[1])))
-	
+			try:
+				self.neutralWords.append((split[0], int(split[1])))
+			except:
+				print "Incomplete definition in ~Neutral_Words: " + allWords[o] + " _ <---specify integer value"
 	def get_good_adjs(self):
 		return self.goodAdjs	
 		
@@ -133,14 +166,29 @@ class Signatures:
 	def __init__(self, comment):
 		wordlist = Wordlist()
 		self.comment = comment
-		self.negaters = wordlist.get_negators()
-		self.badAdjectives = wordlist.get_bad_adjs()
-		self.goodAdjectives = wordlist.get_good_adjs()
-		self.nouns = wordlist.get_context_nouns()
+		self.negaters = wordlist.get_negators() #Signature list
+		self.badAdjectives = wordlist.get_bad_adjs() #Signature list
+		self.goodAdjectives = wordlist.get_good_adjs() #Signature list
+		self.contextNouns = wordlist.get_context_nouns() #Signature list
 
+		self.flaggedWords = self.comment.get_flagged_words() #Comment flagged words
+		self.neutralWords = self.comment.get_neutral_words() #Comment neutral words
 
+	def get_good_adjs_in_comment(self):
+		indexes = []
+		foundWords = []
+		for element in self.flaggedWords:
+			if element[1] in self.goodAdjectives:
+				indexes.append(element[2])
+				indexes.append(element[3])
+				foundWords.append(element[0])
+		if len(foundWords) > 0:
+			return (foundWords, min(indexes), max(indexes))
+		return False
+
+	#Signature for detecting comments regarding cease and decist letters for pirating -- i.e the torrent is illegal and you shouldn't download	
 	def sig_cease_and_decist(self):
-		flaggedWords = self.comment.get_flagged_words()
+		flaggedWords = self.flaggedWords
 		score = 0
 		indexes = []
 		for element in flaggedWords:
@@ -152,46 +200,48 @@ class Signatures:
 			return ("Monitored Torrent", min(indexes), max(indexes), -15)
 		return ("Monitored Torrent", -1, -1, 0)
 
+	#Signature for detecting comments referencing the content as "bad quality"
 	def sig_bad_quality(self):
 		correctlySpelled = []
 		adjectiveFound = False
 		contextFound = False
 		indexes = []
-		for element in self.comment.get_flagged_words():
+		for element in self.flaggedWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
-		for element in self.comment.get_neutral_words():
+		for element in self.neutralWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
 		for word in correctlySpelled:
 			if word in self.badAdjectives:
 				adjectiveFound = True
-			if word in self.nouns:
+			if word in self.contextNouns:
 				contextFound = True
 		if len(indexes) > 0:	
 			if adjectiveFound and contextFound:
 				return ("Bad Quality", min(indexes), max(indexes), -10)
 		return ("Bad Quality", -1, -1, 0)
 	
+	#Signature for detecting comments referencing the content as "good quality"
 	def sig_good_quality(self):
 		correctlySpelled = []
 		adjectiveFound = False
 		contextFound = False
 		indexes = []
-		for element in self.comment.get_flagged_words():
+		for element in self.flaggedWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
-		for element in self.comment.get_neutral_words():
+		for element in self.neutralWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
 		for word in correctlySpelled:
 			if word in self.goodAdjectives:
 				adjectiveFound = True
-			if word in self.nouns:
+			if word in self.contextNouns:
 				contextFound = True
 
 		if len(indexes) > 0:
@@ -199,6 +249,7 @@ class Signatures:
 				return ("Good Quality", min(indexes), max(indexes), 10)
 		return ("Good Quality", -1, -1, 0)
 	
+	#Signature for detecting in comment content rating - i.e "audio:10"
 	def sig_rated_content(self):
 		weight = []
 		rating = 0
@@ -207,13 +258,13 @@ class Signatures:
 		digitFound = False
 		keyFound = False
 		markedWords = []
-		neutralWords = self.comment.get_neutral_words()
-		for element in neutralWords:
+		for element in self.neutralWords:
 			if element[1].isdigit():
 				digitFound = True
 				weight.append(element[1])
 				indexes.append(element[2])
 				indexes.append(element[3])
+			
 			if element[1] == "audio" or element[1] == "video":
 				keyFound = True
 				contentType.append(element[1])
@@ -247,11 +298,11 @@ class Signatures:
 	def sig_malware(self):
 		correctlySpelled = []
 		indexes = []
-		for element in self.comment.get_flagged_words():
+		for element in self.flaggedWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
-		for element in self.comment.get_neutral_words():
+		for element in self.neutralWords:
 			correctlySpelled.append(element[1])
 			indexes.append(element[2])
 			indexes.append(element[3])
@@ -260,7 +311,7 @@ class Signatures:
 			if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
 				return ("Malware Detected", min(indexes), max(indexes), -15)
 		return (-1, -1, 0)
-	#	
+		
 class CommentAnalysis:
 	def __init__(self, comment):
 		wordlist = Wordlist()
@@ -271,11 +322,10 @@ class CommentAnalysis:
 		#Contains a list of common good words in torrent comments with their respective worth (1-10)
 		self.goodWordList = wordlist.get_good_words_weighted()
 
-
 		#Contains a list of common bad words in torrent comments with their respective worth (-1-(-10))
 		self.badWordList = wordlist.get_bad_words_weighted()
-
-		#Words that add contextual support with their respective multiplier
+		
+		#Contains a list of words that may be relevant 
 		self.contextList = wordlist.get_neutral_words_weighted()
 
 	def _unpack_list(self, listType, values):
