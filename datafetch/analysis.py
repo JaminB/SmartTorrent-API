@@ -173,7 +173,7 @@ class Signatures:
 
 		self.flaggedWords = self.comment.get_flagged_words() #Comment flagged words
 		self.neutralWords = self.comment.get_neutral_words() #Comment neutral words
-
+	
 	def get_good_adjs_in_comment(self):
 		indexes = []
 		foundWords = []
@@ -185,70 +185,81 @@ class Signatures:
 		if len(foundWords) > 0:
 			return (foundWords, min(indexes), max(indexes))
 		return False
+	
+	def get_bad_adjs_in_comment(self):
+		indexes = []
+		foundWords = []
+		for element in self.flaggedWords:
+			if element[1] in self.badAdjectives:
+				indexes.append(element[2])
+				indexes.append(element[3])
+				foundWords.append(element[0])
+		if len(foundWords) > 0:
+			return (foundWords, min(indexes), max(indexes))
+		return False
+	
+	def get_custom_words_in_comment(self, words):
+		indexes = []
+		foundWords = []
+		for element in self.flaggedWords + self.neutralWords:
+			if element[1] in words:
+				indexes.append(element[2])
+				indexes.append(element[3])
+				foundWords.append(element[0])
+		if len(foundWords) > 0:
+			return (foundWords, min(indexes), max(indexes))
+		return False
+
+	def get_context_nouns_in_comment(self):
+		indexes = []
+		foundWords = []
+		for element in self.neutralWords:
+			if element[1] in self.contextNouns:
+				indexes.append(element[2])
+				indexes.append(element[3])
+				foundWords.append(element[0])
+		if len(foundWords) > 0:
+			return (foundWords, min(indexes), max(indexes))
+		return False
+
+	def combine_lists(self, words1, words2):
+		indexes = []
+		if words1 and words2:
+			indexes.append(words1[1])
+			indexes.append(words2[1]) 
+			indexes.append(words1[2])
+			indexes.append(words2[2])
+			return (words1[0] + words2[0], min(indexes), max(indexes))
+		else:
+			return False
+	def sizeOf(self, words):
+		try:
+			return len(words[0])
+		except TypeError:
+			return 0
+
+	def create_signature(self, name, value, words):
+		if words != False:
+			return (name, words[1], words[2], value)
+		return False
 
 	#Signature for detecting comments regarding cease and decist letters for pirating -- i.e the torrent is illegal and you shouldn't download	
 	def sig_cease_and_decist(self):
-		flaggedWords = self.flaggedWords
-		score = 0
-		indexes = []
-		for element in flaggedWords:
-			if element[1] == "cease" or element[1] == "copyright" or element[1] == "decist" or element[1] == "isp" or element[1] == "watched" or element[1] == "tracked":
-				score +=1
-				indexes.append(element[2])
-				indexes.append(element[3])
-		if score > 1:
-			return ("Monitored Torrent", min(indexes), max(indexes), -15)
-		return ("Monitored Torrent", -1, -1, 0)
+		result = self.get_custom_words_in_comment(["cease", "copyright", "decist", "isp", "watched", "tracked"])
+		if self.sizeOf(result) > 1:
+			return self.create_signature("Monitored Torrent", -15, result)
+		return False
 
 	#Signature for detecting comments referencing the content as "bad quality"
 	def sig_bad_quality(self):
-		correctlySpelled = []
-		adjectiveFound = False
-		contextFound = False
-		indexes = []
-		for element in self.flaggedWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-		for element in self.neutralWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-		for word in correctlySpelled:
-			if word in self.badAdjectives:
-				adjectiveFound = True
-			if word in self.contextNouns:
-				contextFound = True
-		if len(indexes) > 0:	
-			if adjectiveFound and contextFound:
-				return ("Bad Quality", min(indexes), max(indexes), -10)
-		return ("Bad Quality", -1, -1, 0)
-	
+		result = self.create_signature("Bad Quality", -10, self.combine_lists(self.get_context_nouns_in_comment(), self.get_bad_adjs_in_comment()))
+		return result
+
 	#Signature for detecting comments referencing the content as "good quality"
 	def sig_good_quality(self):
-		correctlySpelled = []
-		adjectiveFound = False
-		contextFound = False
-		indexes = []
-		for element in self.flaggedWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-		for element in self.neutralWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-		for word in correctlySpelled:
-			if word in self.goodAdjectives:
-				adjectiveFound = True
-			if word in self.contextNouns:
-				contextFound = True
-
-		if len(indexes) > 0:
-			if adjectiveFound and contextFound:
-				return ("Good Quality", min(indexes), max(indexes), 10)
-		return ("Good Quality", -1, -1, 0)
-	
+			
+		result = self.create_signature("Good Quality", 10, self.combine_lists(self.get_context_nouns_in_comment(), self.get_good_adjs_in_comment()))
+		return result
 	#Signature for detecting in comment content rating - i.e "audio:10"
 	def sig_rated_content(self):
 		weight = []
@@ -296,21 +307,7 @@ class Signatures:
 		return (-1, -1, 0)
 		
 	def sig_malware(self):
-		correctlySpelled = []
-		indexes = []
-		for element in self.flaggedWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-		for element in self.neutralWords:
-			correctlySpelled.append(element[1])
-			indexes.append(element[2])
-			indexes.append(element[3])
-	
-		if len(indexes) > 0:
-			if "malware" in correctlySpelled or "trojan" in correctlySpelled or "virus" in correctlySpelled:
-				return ("Malware Detected", min(indexes), max(indexes), -15)
-		return (-1, -1, 0)
+		return self.create_signature("Malware Detected", -15, self.get_custom_words_in_comment(["malware", "trojan", "virus", "botnet"]))
 		
 class CommentAnalysis:
 	def __init__(self, comment):
@@ -410,16 +407,16 @@ class CommentAnalysis:
 		#Signatures
 
 		signatures = Signatures(self.commentAnalysis)
-		if signatures.sig_cease_and_decist()[1] != -1:
+		if signatures.sig_cease_and_decist() != False:
 			self.commentAnalysis.add_signature(signatures.sig_cease_and_decist())
 			commentRating += signatures.sig_cease_and_decist()[3]
-		if signatures.sig_good_quality()[1] != -1:
+		if signatures.sig_good_quality() != False:
 			self.commentAnalysis.add_signature(signatures.sig_good_quality())
 			commentRating += signatures.sig_good_quality()[3]
-		if signatures.sig_bad_quality()[1] != -1:
+		if signatures.sig_bad_quality() != False:
 			self.commentAnalysis.add_signature(signatures.sig_bad_quality())
 			commentRating += signatures.sig_bad_quality()[3]
-		if signatures.sig_malware()[1] != -1:
+		if signatures.sig_malware() != False:
 			self.commentAnalysis.add_signature(signatures.sig_malware())
 			commentRating += signatures.sig_malware()[3]
 		if signatures.sig_rated_content()[1] != -1:

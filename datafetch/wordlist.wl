@@ -39,12 +39,15 @@
 	cd
 	content
 	copy
+	download
 	mix
 	movie
 	music
 	quality
 	song
 	torrent
+	upload
+	version
 	video
 	work
 	
