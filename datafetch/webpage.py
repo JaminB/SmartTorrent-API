@@ -18,6 +18,8 @@ class KickAssURLBuilder:
 	
 	def build(self):
 	#	print self.baseURI + self.search + " " + self.searchURI.replace('*mutator*',self.category)
+		if self.category.lower() == "any":
+			return self.baseURI + self.search + " " + self.searchURI.replace('*mutator*','')
 		return self.baseURI + self.search + " " + self.searchURI.replace('*mutator*',self.category)
 
 class PirateBayURLBuilder:
@@ -30,6 +32,7 @@ class PirateBayURLBuilder:
 		self.gameURI = '*mutator*/0/7/400'
 		self.bookURI = '*mutator*/0/7/601'
 		self.applicationURI = '*mutator*/0/7/300'
+		self.anyURI = '*mutator*/0/7/0'
 		self.otherURI = '*mutator*/0/7/600'
 
 		#User input variables
@@ -56,8 +59,11 @@ class PirateBayURLBuilder:
 		elif self.category.lower() == "game" or self.category == "games":
 			categoryURI = self.gameURI
 		
-		else:
+		elif self.category.lower() == "other":
 			categoryURI = self.otherURI
+		
+		else:
+			categoryURI = self.anyURI
 
 		return self.baseURI + categoryURI.replace('*mutator*', self.search)
 		

@@ -221,7 +221,19 @@ class Signatures:
 		if len(foundWords) > 0:
 			return (foundWords, min(indexes), max(indexes))
 		return False
-
+	
+	def get_digits_in_comment(self):
+		indexes = []
+		foundWords = []
+		for element in self.neutralWords:
+			if element[1].isdigit():
+				indexes.append(element[2])
+				indexes.append(element[3])
+				foundWords.append(re.sub(r'[^\w]', '', element[0])) #Patched possible bug with in str.isdigit() where extra characters are leaked
+		if len(foundWords) > 0:
+			return (foundWords, min(indexes), max(indexes))
+		return False
+			
 	def combine_lists(self, words1, words2):
 		indexes = []
 		if words1 and words2:
@@ -262,49 +274,25 @@ class Signatures:
 		return result
 	#Signature for detecting in comment content rating - i.e "audio:10"
 	def sig_rated_content(self):
-		weight = []
 		rating = 0
-		contentType = []
-		indexes = []
-		digitFound = False
-		keyFound = False
-		markedWords = []
-		for element in self.neutralWords:
-			if element[1].isdigit():
-				digitFound = True
-				weight.append(element[1])
-				indexes.append(element[2])
-				indexes.append(element[3])
-			
-			if element[1] == "audio" or element[1] == "video":
-				keyFound = True
-				contentType.append(element[1])
-				indexes.append(element[2])
-				indexes.append(element[3])
-		
-		if len(weight) >= len(contentType):
-			for i in range(0, len(contentType)):
-				if contentType[i] not in markedWords:
-					markedWords.append(contentType[i])
-					if int(weight[i]) < 11:
-						if int(weight[i]) > 5:
-							rating += int(weight[i])
-						else:
-							rating -= (10 - int(weight[i]))
-		else:
-			for i in range(0, len(weight)):
-				if contentType[i] not in markedWords:
-					markedWords.append(contentType[i])
-					if int(weight[i]) < 11:
-						if int(weight[i]) > 5:
-							rating += int(weight[i])
-						else:
-							rating -= (10 - int(weight[i]))
+		digits = self.get_digits_in_comment()
+		keyWords = self.get_custom_words_in_comment(["audio", "video"])
+		if self.combine_lists(digits, keyWords) != False:
+			if self.sizeOf(digits) >= self.sizeOf(keyWords):
+				for i in range(0, self.sizeOf(keyWords)):
+					if int(digits[0][i]) > 5:
+						rating += int(digits[0][i])
+					else:
+						rating -= (10 - int(digits[0][i]))
+			else:
+				for i in range(0, int(self.sizeOf(digits))):
+					if int(digits[0][i]) > 5:
+						rating += int(digits[0][i])
+					else:
+						rating -= (10 - int(digits[0][i]))
+			return self.create_signature("Content Rating", rating, self.combine_lists(digits, keyWords))
+		return False
 
-		if len(indexes) > 0:
-				if digitFound and keyFound:
-					return ("Content Rating", min(indexes), max(indexes), rating)
-		return (-1, -1, 0)
 		
 	def sig_malware(self):
 		return self.create_signature("Malware Detected", -15, self.get_custom_words_in_comment(["malware", "trojan", "virus", "botnet"]))
@@ -419,7 +407,7 @@ class CommentAnalysis:
 		if signatures.sig_malware() != False:
 			self.commentAnalysis.add_signature(signatures.sig_malware())
 			commentRating += signatures.sig_malware()[3]
-		if signatures.sig_rated_content()[1] != -1:
+		if signatures.sig_rated_content() != False:
 			self.commentAnalysis.add_signature(signatures.sig_rated_content())
 			commentRating += signatures.sig_rated_content()[3]
 		self.commentAnalysis.set_comment_rating(commentRating)
