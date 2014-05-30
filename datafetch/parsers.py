@@ -1,5 +1,5 @@
 #! /usr/bin/python
-
+from converters import date
 class SearchCache:
 #Object to hold all torrent search data (titles, magnetlinks, sizes, seeds, leeches, and infoLinks)	
 	def __init__(self):
@@ -51,6 +51,7 @@ class InfoCache:
 		self.comments = []
 		self.languages = "Unknown"
 		self.numberOfFiles = 0
+		self.date = "Unknown"
 	
 	def add_comment(self, comment):
 		self.comments.append(comment)
@@ -61,6 +62,9 @@ class InfoCache:
 	def add_number_of_files(self, numberOfFiles):
 		self.numberOfFiles = numberOfFiles
 	
+	def add_date(self, date):
+		self.date = date
+
 	def get_comments(self):
 		return self.comments
 
@@ -69,8 +73,10 @@ class InfoCache:
 
 	def get_number_of_files(self):
 		return self.numberOfFiles
-
 	
+	def get_date(self):
+		return self.date
+
 class KickAssSearchParser:
 	#Pulls relevant data off the search page stores in cache
 	def __init__(self, webpage):
@@ -156,17 +162,21 @@ class KickAssInfoLinkParser:
 		self.webpage = webpage
 		self.cache = InfoCache()
 		self.cacheSize = 0
-	
+		
 	def build_cache(self):
 		#String for finding comments
 		searchRatingTag = 'audio: '
 		searchCommentTag = 'class="commentText botmarg5px topmarg5px"'	
 		#String for finding number of files
 		searchNumberOfFilesTag = '<td class="torFileName"'
-
+		
 		#String for finding language
 		searchLanguageTag = '<span id="lang_'	
 		
+		#String for finding dates
+		searchDateTag = "Added on"
+		searchDateTag2 = "by <span"
+
 		lines = self.webpage.split('\n')
 		numberOfFiles = 0
 		temp = ''
@@ -191,7 +201,15 @@ class KickAssInfoLinkParser:
 				p1 = line.split('>')
 				temp = p1[1]
 				self.cache.add_language(temp)
-			
+			if searchDateTag in line and searchDateTag2 in line:
+				p1 = line.split(" ")
+				if len(p1[4]) != 2:
+					convDate = date(p1[2].strip() + " " + p1[3].replace(",","").strip()+ " " + p1[4].strip()).convert()
+					
+				else:
+					convDate = date(p1[2].strip() + " " + "1"+ " " + p1[5].strip()).convert()
+				self.cache.add_date(convDate)
+	
 		self.cache.add_number_of_files(numberOfFiles)
 
 	def get_comments(self):
@@ -202,6 +220,9 @@ class KickAssInfoLinkParser:
 	
 	def get_number_of_files(self):
 		return self.cache.get_number_of_files()
+
+	def get_date(self):
+		return self.cache.get_date()
 	
 	def get_cache(self):
 		return self.cache
@@ -308,6 +329,10 @@ class PirateBayInfoLinkParser:
 		#Strings for finding comments
 		searchCommentTag ='<div class="comment">'
 		commentsOnLine = False
+		
+		#Strings for finding dates
+		searchDateTag = '<dt>Uploaded:</dt>'
+		dateOnLine = False
 
 		for line in lines:
 			if languageOnLine:
@@ -342,9 +367,18 @@ class PirateBayInfoLinkParser:
 				languageOnLine = True
 			if searchNumberOfFilesTag in line:
 				numberOfFilesOnLine = True
-
 			if searchCommentTag in line:
 				commentsOnLine = True
+			if dateOnLine:
+				p1 = line.split(" ")
+				sanitized = p1[0].replace("<dd>","").strip()
+				self.cache.add_date(sanitized)	
+				dateOnLine = False	
+			if searchDateTag in line:
+				dateOnLine = True
+					
+				
+				
 		if languages == "":
 			languages = "Unknown"
 		self.cache.add_language(languages)
@@ -357,4 +391,7 @@ class PirateBayInfoLinkParser:
 
 	def get_languages(self):
 		return self.cache.get_languages()
+	
+	def get_date(self):
+		return self.cache.get_date()
 

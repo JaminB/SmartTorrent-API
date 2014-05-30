@@ -26,7 +26,7 @@ class ResultCache:
 		self.commentAnalysis = []
 		self.languages = []
 		self.numberOfFilesList = []
-	
+		self.dates = [] 
 	def __str__(self):
 		return str(self.titles) + str(self.magnetLinks) + str(self.seeds) + str(self.leeches) + str(self.sizes) + str(self.infoLinks) + str(self.comments) + str(self.languages)
 	
@@ -66,11 +66,12 @@ class ResultCache:
 		dComments = self.comments
 		dLanguages = self.languages
 		dNumberOfFilesList = self.numberOfFilesList
+		dDates = self.dates
 		hashes = self._get_magnet_hashes()
 		markedHashes = []
 		duplicates = self._get_duplicate_hashes()
 		dIndexes = self._get_duplicate_hash_first_occurences()
-		oTitles, oMagnetLinks, oSeeds, oLeeches, oSizes, oInfoLinks, oComments, oLanguages, oNumberOfFilesList = ([] for i in range(9))
+		oTitles, oMagnetLinks, oSeeds, oLeeches, oSizes, oInfoLinks, oComments, oLanguages, oNumberOfFilesList, oDates = ([] for i in range(10))
 		
 		for i in range(0, len(hashes)):
 			if hashes[i] not in duplicates:
@@ -84,6 +85,7 @@ class ResultCache:
 				oComments.append(self.comments[i])
 				oLanguages.append(self.languages[i])
 				oNumberOfFilesList.append(self.numberOfFilesList[i])
+				oDates.append(self.dates[i])
 
 
 			else:
@@ -98,6 +100,7 @@ class ResultCache:
 					oComments.append(self.comments[i])
 					oLanguages.append(self.languages[i])
 					oNumberOfFilesList.append(self.numberOfFilesList[i])
+					oDates.append(self.dates[i])
 				else:
 					oComments[markedHashes.index(hashes[i])] += self.comments[i]
 
@@ -110,6 +113,7 @@ class ResultCache:
 		self.comments = oComments
 		self.languages = oLanguages
 		self.NumberOfFilesList = oNumberOfFilesList
+		self.dates = oDates
 		#for title in self.titles:
 		#	print title
 		
@@ -142,7 +146,7 @@ class ResultCache:
 	
 	def add_size(self, size):
 		self.sizes.append(size)
-	
+		
 	def add_info_link(self, infoLink):
 		self.infoLinks.append(infoLink)
 		
@@ -173,6 +177,9 @@ class ResultCache:
 	def add_number_of_files(self, numberOfFiles):
 		self.numberOfFilesList.append(numberOfFiles)
 	
+	def add_date(self, date):
+		self.dates.append(date)
+	
 	def get_comments(self):
 		return self.comments
 
@@ -181,9 +188,12 @@ class ResultCache:
 
 	def get_number_of_files(self):
 		return self.numberOfFilesList
+
+	def get_dates(self):
+		return self.dates
 	
 	def to_json(self):
-		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "comments" : self.commentAnalysis, "rating": self.overallRating},sort_keys=True, indent=4)
+		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "dates:" : self.dates, "comments" : self.commentAnalysis, "rating": self.overallRating},sort_keys=True, indent=4)
 
 
 class Search:
@@ -263,9 +273,11 @@ class Search:
 			comments =  kInfoParser.get_comments()
 			languages = kInfoParser.get_languages()
 			numberOfFiles = kInfoParser.get_number_of_files()
+			date = kInfoParser.get_date()
 			self.cache.add_comments(comments)
 			self.cache.add_language(languages)
 			self.cache.add_number_of_files(numberOfFiles)
+			self.cache.add_date(date)
 
 		for i in range(0, len(urls)):
 			self.cache.add_info_link(urls[i])
@@ -296,9 +308,11 @@ class Search:
 			comments =  pInfoParser.get_comments()
 			languages = pInfoParser.get_languages()
 			numberOfFiles = pInfoParser.get_number_of_files()
+			date = pInfoParser.get_date()
 			self.cache.add_comments(comments)
 			self.cache.add_language(languages)
 			self.cache.add_number_of_files(numberOfFiles)
+			self.cache.add_date(date)
 
 		for i in range(0, len(urls)):
 			self.cache.add_info_link(urls[i])
