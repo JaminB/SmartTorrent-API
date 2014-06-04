@@ -4,14 +4,12 @@ import cgi
 import datafetch.searchbuilder
 def GET():
 	form = cgi.FieldStorage()
-	print "Content-type:text/html\r\n\r\n"
+	print "Content-type:text/json\r\n\r\n"
 	if "term" not in form:
-		print "<H1>Error</H1>"
-		print "Please fill in term field."
+		print '{ "error": "Please fill in term field." }'
 		return
 	elif "category" not in form:
-		print "<H1>Error</H1>"
-		print "Please fill in category field."
+		print '{ "error": "Please fill in category field." }'
 		return
 	else:
 		
