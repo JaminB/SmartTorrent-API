@@ -25,6 +25,7 @@
 	horrible
 	low
 	shit
+	stupid
 	shitty
 	terrible
 
@@ -98,6 +99,7 @@
 	shit -2
 	shitty -2
 	slow -3
+	stupid -2
 	tracked -2
 	trojan -8
 	virus -8
