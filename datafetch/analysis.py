@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import re
+import config
 class Wordlist:
 	def __init__(self):
 		self.goodAdjs = []
@@ -13,7 +14,7 @@ class Wordlist:
 	
 	def _populate(self):
 		try:
-			f = open("wordlist.wl", "r")
+			f = open(config.variables.get("wordlist_location"), "r")
 		except IOError:
 			print "File Not Found Error: wordlist.wl cannot be found"
 		allWords = []

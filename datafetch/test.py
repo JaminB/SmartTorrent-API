@@ -1,4 +1,3 @@
-from converters import date
+import config
+print config.variables.get("session_data")
 
-dateI = date("Apr 16 2014").convert()
-print dateI

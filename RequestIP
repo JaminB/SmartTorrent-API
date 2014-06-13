@@ -1,0 +1,14 @@
+#!/usr/bin/python
+import sys
+import cgi
+from datafetch import loadbalancer
+def GET():
+	form = cgi.FieldStorage()
+	print "Content-type:text/json\r\n\r\n"
+	#if "pw" not in form:
+	#	print '{ "error": "No password specified." }'
+	#	return
+	#else:
+	loadbalancer.set_ip_list()
+	print loadbalancer.get_next_ip_json()
+GET()

@@ -1,0 +1,6 @@
+#Files
+wordlist_location = /var/www/api/datafetch/wordlist.wl
+ips_location = /var/www/api/datafetch/ips.list 
+
+#Directories
+session_data =/var/www/api/datafetch/session-data/
