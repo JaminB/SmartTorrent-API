@@ -68,6 +68,7 @@ class PirateBayURLBuilder:
 		return self.baseURI + categoryURI.replace('*mutator*', self.search)
 		
 class Content:
+	#Object to get and store the html of a given url
 	def __init__(self, url):
 		self.url = url
 

@@ -1,6 +1,7 @@
 import sys
 #Config Location
 configFile = "/var/www/api/datafetch/config"
+#DO NOT EDIT BELOW THIS LINE#
 config = open(configFile, "r")
 options = ["ips_location", "wordlist_location", "session_data"]
 variables = {}

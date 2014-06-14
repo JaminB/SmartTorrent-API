@@ -13,6 +13,7 @@ class Wordlist:
 		self._populate()
 	
 	def _populate(self):
+		#Load all words to fire on from the wordlist.wl file
 		try:
 			f = open(config.variables.get("wordlist_location"), "r")
 		except IOError:
@@ -99,26 +100,34 @@ class Wordlist:
 			except:
 				print "Incomplete definition in ~Neutral_Words: " + allWords[o] + " _ <---specify integer value"
 	def get_good_adjs(self):
+		#returns a list of positive adjectives found in wordlist.wl
 		return self.goodAdjs	
 		
 	def get_bad_adjs(self):
+		#returns a list of negative adjectives found in wordlist.wl
 		return self.badAdjs
 
 	def get_context_nouns(self):
+		#returns a list of words that add context to the sentence found in wordlist.wl
 		return self.contextNouns
 	
 	def get_negators(self):
+		#returns a list of words containing: no, not, and never found in wordlist.wl
 		return self.negators	
 
 	def get_good_words_weighted(self):
+		#returns a list of good words and their weights in the sentence
 		return self.goodWords
 
 	def get_bad_words_weighted(self):
+		#returns a list of bad words and their weights in the sentence
 		return self.badWords
 
 	def get_neutral_words_weighted(self):
+		#returns a list of neutral words and their weights in the sentence
 		return self.neutralWords
 class Comment:
+	#Comment object for holding all analyis data for a single comment
 	def __init__(self):
 		self.comment = ""
 		self.commentRating = 0
@@ -131,39 +140,50 @@ class Comment:
 		return str((self.comment, self.commentRating, self.flaggedWordRatings, self.neutralWords))
 	
 	def set_comment(self, comment):
+		#The comment string as it was originally parsed off the host site
 		self.comment = comment
 
 	def set_comment_rating(self, commentRating):
+		#The rating calculated by a combination of words and signatures that have fired.
 		self.commentRating = commentRating
 	
 	def add_flagged_word(self, word, correctWord, index, indexEnd, flaggedWordWeight):
+		#Add a word that contribute to the positive or negative score of the comment as a whole
 		flaggedWord = (word, correctWord, index, indexEnd, flaggedWordWeight)
 		self.flaggedWordRatings.append(flaggedWord)
 	
-	def add_neutral_word(self, word, correctWord, index, indexEnd, contentWordWeight):	
+	def add_neutral_word(self, word, correctWord, index, indexEnd, contentWordWeight):
+		#Add a word that helps paint a context of a comment
 		contextWord = (word, correctWord, index, indexEnd, contentWordWeight)
 		self.neutralWords.append(contextWord)
 
 	def add_signature(self, signature):
+		#Add any signatures that fired as a result of a combination of two or more words in a comment
 		self.signatures.append(signature)
 
 	def get_comment(self):
+		#Returns the comment string
 		return self.comment
 	
 	def get_comment_rating(self):
+		#Returns the overall rating of the comment
 		return self.commentRating
 	
 	def get_flagged_words(self):
+		#Returns any flagged words that were found in the comment
 		return self.flaggedWordRatings
 	
 	def get_neutral_words(self):
+		#Returns any neutral context words that were found in the comment
 		return self.neutralWords
 	
 	def get_signatures(self):
+		#Returns all signatures asscociated with the comment
 		return self.signatures
 	
 
 class Signatures:
+	#Signature object for holding all signatures that fire, they must be included in a comment using the Comment classes "add_signature method"
 	def __init__(self, comment):
 		wordlist = Wordlist()
 		self.comment = comment
@@ -175,7 +195,10 @@ class Signatures:
 		self.flaggedWords = self.comment.get_flagged_words() #Comment flagged words
 		self.neutralWords = self.comment.get_neutral_words() #Comment neutral words
 	
+	#Signature Algebra Operators
+	#Each method returns a list of words that were found and the range coordinates. The coordinates are the min and max character indexes in the comment string.
 	def get_good_adjs_in_comment(self):
+		#Returns a list of good adjectives found in a comment
 		indexes = []
 		foundWords = []
 		for element in self.flaggedWords:
@@ -188,6 +211,7 @@ class Signatures:
 		return False
 	
 	def get_bad_adjs_in_comment(self):
+		#Returns a list of bad adjectives found in a comment
 		indexes = []
 		foundWords = []
 		for element in self.flaggedWords:
@@ -200,6 +224,7 @@ class Signatures:
 		return False
 	
 	def get_custom_words_in_comment(self, words):
+		#Returns all positive, negative, and neutral words that match those given in 'words' <--tuple or list
 		indexes = []
 		foundWords = []
 		for element in self.flaggedWords + self.neutralWords:
@@ -212,6 +237,7 @@ class Signatures:
 		return False
 
 	def get_context_nouns_in_comment(self):
+		#Returns any neutral context nouns in the comment
 		indexes = []
 		foundWords = []
 		for element in self.neutralWords:
@@ -224,6 +250,7 @@ class Signatures:
 		return False
 	
 	def get_digits_in_comment(self):
+		#Returns any digits found in the comment
 		indexes = []
 		foundWords = []
 		for element in self.neutralWords:
@@ -236,6 +263,7 @@ class Signatures:
 		return False
 			
 	def combine_lists(self, words1, words2):
+		#Allows you to take the results from two separate signature algebra operations.
 		indexes = []
 		if words1 and words2:
 			indexes.append(words1[1])
@@ -246,6 +274,7 @@ class Signatures:
 		else:
 			return False
 	def sizeOf(self, words):
+		#Returns the number of words stored in a signature.
 		try:
 			return len(words[0])
 		except TypeError:
@@ -256,25 +285,26 @@ class Signatures:
 			return (name, words[1], words[2], value)
 		return False
 
-	#Signature for detecting comments regarding cease and decist letters for pirating -- i.e the torrent is illegal and you shouldn't download	
 	def sig_cease_and_decist(self):
+		#Signature for detecting comments regarding cease and decist letters for pirating -- i.e the torrent is illegal and you shouldn't download	
 		result = self.get_custom_words_in_comment(["cease", "copyright", "decist", "isp", "watched", "tracked"])
 		if self.sizeOf(result) > 1:
 			return self.create_signature("Monitored Torrent", -15, result)
 		return False
 
-	#Signature for detecting comments referencing the content as "bad quality"
 	def sig_bad_quality(self):
+		#Signature for detecting comments referencing the content as "bad quality"
 		result = self.create_signature("Bad Quality", -10, self.combine_lists(self.get_context_nouns_in_comment(), self.get_bad_adjs_in_comment()))
 		return result
 
-	#Signature for detecting comments referencing the content as "good quality"
 	def sig_good_quality(self):
-			
+		#Signature for detecting comments referencing the content as "good quality"
 		result = self.create_signature("Good Quality", 10, self.combine_lists(self.get_context_nouns_in_comment(), self.get_good_adjs_in_comment()))
 		return result
-	#Signature for detecting in comment content rating - i.e "audio:10"
+		#Signature for detecting in comment content rating - i.e "audio:10"
+	
 	def sig_rated_content(self):
+		#Extracts in comment ratings such as "Audio: 10 Video: 10"
 		rating = 0
 		digits = self.get_digits_in_comment()
 		keyWords = self.get_custom_words_in_comment(["audio", "video"])
@@ -347,9 +377,11 @@ class CommentAnalysis:
 	    	return thisrow[len(seq2) - 1]
 	
 	def _get_tolerance(self, seq):
+		#Determines how the amount of letters a word can be off based on length
 		return len(seq) * .25
 
 	def build_cache(self):
+		#Stores results in a comment object
 		wordArray = self.comment.split(" ")
                 commentRating = 0
                 flaggedWordList = []
@@ -394,7 +426,6 @@ class CommentAnalysis:
                         commentRating += word[4]
 
 		#Signatures
-
 		signatures = Signatures(self.commentAnalysis)
 		if signatures.sig_cease_and_decist() != False:
 			self.commentAnalysis.add_signature(signatures.sig_cease_and_decist())
@@ -414,4 +445,5 @@ class CommentAnalysis:
 		self.commentAnalysis.set_comment_rating(commentRating)
 			
 	def get_cache(self):
+		#Returns the comment object 
 		return self.commentAnalysis

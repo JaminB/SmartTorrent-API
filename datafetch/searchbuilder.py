@@ -31,6 +31,7 @@ class ResultCache:
 		return str(self.titles) + str(self.magnetLinks) + str(self.seeds) + str(self.leeches) + str(self.sizes) + str(self.infoLinks) + str(self.comments) + str(self.languages)
 	
 	def _get_magnet_hashes(self):
+		#Returns a list of all the magnet hashes in a given search
 		magHashes = []
 		for link in self.magnetLinks:
 			p1 = link.split('&')
@@ -39,6 +40,7 @@ class ResultCache:
 		return magHashes
 	
 	def _get_duplicate_hashes(self):
+		#Returns a list of all duplicate hashes
 		duplicates = []
 		hashes = self._get_magnet_hashes()
 		for i in range(0, len(hashes)):
@@ -48,6 +50,7 @@ class ResultCache:
 						duplicates.append(hashes[i])
 		return duplicates
 	def _get_duplicate_hash_first_occurences(self):
+		#Gets all the indexes of first occurences of duplicate hashes
 		duplicates = self._get_duplicate_hashes()
 		hashes = self._get_magnet_hashes()
 		firstOccurences = []
@@ -118,6 +121,7 @@ class ResultCache:
 		#	print title
 		
 	def analyze_comments(self):
+		#Adds a analysis to results cache
 		for commentList in self.comments:
 			analyzedCommentsBlock = []
 			overallRating = 0
