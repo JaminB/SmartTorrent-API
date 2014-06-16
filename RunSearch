@@ -1,14 +1,21 @@
 #!/usr/bin/python
 import sys
+import cgi
 import datafetch.searchbuilder
+from datafetch import searchcache
 def GET():
-	cache = datafetch.searchbuilder.Search(sys.argv[1],sys.argv[2])
-	cache.build_cache()
-	json = cache.get_cache().to_json()
-	lines = json.split('\n')
-	for line in lines:
+	print "Content-type:text/json\r\n\r\n"
+	buildcache = datafetch.searchbuilder.Search("linkin park 3","music")
+	if buildcache.check_in_cache():
+		print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
+
+	else:
+		buildcache.build_cache()
+		cache = buildcache.get_cache()
+		json = cache.to_json()
+		lines = json.split('\n')
+		for line in lines:
 			print line
-			#print "<br>"
 
 
 GET()

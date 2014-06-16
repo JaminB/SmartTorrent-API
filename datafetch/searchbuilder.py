@@ -1,8 +1,10 @@
 #!/usr/bin/python 
 import sys
-import time
 import json
+import config
+import searchcache
 from multiprocessing.dummy import Pool as ThreadPool
+from hashlib import md5
 from webpage import KickAssURLBuilder 
 from webpage import Content
 from parsers import KickAssSearchParser
@@ -122,6 +124,8 @@ class ResultCache:
 		
 	def analyze_comments(self):
 		#Adds a analysis to results cache
+		del self.commentAnalysis[:]
+		del self.overallRating[:]
 		for commentList in self.comments:
 			analyzedCommentsBlock = []
 			overallRating = 0
@@ -207,21 +211,55 @@ class Search:
 		self.searchCategory = searchCategory
 		self.cache = ResultCache()
 		
+		#EXPIRIMENTAL - Dynamic Results
+		self.persisthash = self._hash_title_and_category() 
+		self.isInCache = self._at_start_check_in_cache()
+		#if not self.isInCache:
+		#	self._persist()
+		
 	
+	#EXPIRIMENTAL - Dynamic Results
+	
+	def _at_start_check_in_cache(self):
+		hash = self._hash_title_and_category()
+		return searchcache.check_exists_by_hash(hash)
+
+	def _hash_title_and_category(self):
+		return md5(self.searchTitle + self.searchCategory).hexdigest()
+
+	def check_in_cache(self):
+		return self.isInCache
+
+	def _persist(self):
+		#Writes a special file where cache data is persisted during the course of a search. 
+		f = open(config.variables.get("search_cache") + self.persisthash, "w")
+		f.close()
+
+	def _write_to_persisted(self, cache):
+		#Writes a part of a results hash to a file  to a persisted file on the filesystem
+		try:
+			f = open(config.variables.get("search_cache") + self.persisthash, "w")
+		
+			f.write(cache.to_json())
+			f.close()
+		except Exception,e: 
+			print str(e)
+      
+
+	#################################
 	def _get_content(self,url):
 		#Get the actual raw HTML of info page and return a tuple containing the raw_html ([0]) and the url ([1]) associated with it
 		content = Content(url)
 		rawResults = (content.get(), url)
 		return rawResults
-	
-	
+		
 	def _get_kat_search_cache(self):
 		#Get the initial kat search cache
 		kURLBuilder=KickAssURLBuilder(self.searchTitle, self.searchCategory)
 		content = Content(kURLBuilder.build())
 		kSearchParser = KickAssSearchParser(content.get())
 		kSearchParser.build_cache()
-		katSearchCache = kSearchParser.get_cache()
+		katSearchCache = kSearchParser.get_cache()	
 		return katSearchCache
 	
 	def _get_pirate_search_cache(self):
@@ -325,14 +363,25 @@ class Search:
 			self.cache.add_seed(seeds[i])
 			self.cache.add_leech(leeches[i])
 			self.cache.add_size(sizes[i])
-		#print "Pirate cache built."	
 	
 	def build_cache(self):	
-		pool = ThreadPool(2)
-		pool.apply_async(self.build_kat_cache)
-		pool.apply_async(self.build_pirate_cache)
-		pool.close()
-		pool.join()
+		#pool = ThreadPool(2)
+		#pool.apply_async(self.build_kat_cache)
+		#pool.apply_async(self.build_pirate_cache)
+		#pool.close()
+		#pool.join()
+		
+		#EXPIRIMENTAL - Dynamic Results
+		self.build_kat_cache()
+		currentCache = self.get_cache()
+		currentCache.de_duplicate_cache()
+		currentCache.analyze_comments()
+		self._write_to_persisted(currentCache)	
+		self.build_pirate_cache()
+		currentCache.analyze_comments()
+		currentCache.de_duplicate_cache()
+		self._write_to_persisted(self.get_cache())
+	
 	
 	def get_cache(self):
 		return self.cache
