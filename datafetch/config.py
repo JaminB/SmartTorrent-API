@@ -1,9 +1,9 @@
 import sys
 #Config Location
-configFile = "/var/www/api/datafetch/config"
+configFile = "/home/jamin/smart_torrent/smart_torrent/datafetch/config"
 #DO NOT EDIT BELOW THIS LINE#
 config = open(configFile, "r")
-options = ["ips_location", "wordlist_location", "session_data"]
+options = ["ips_location", "wordlist_location", "session_data", "search_cache"]
 variables = {}
 lineCount = 0
 for line in config:
