@@ -1,0 +1,9 @@
+#Files
+wordlist_location = /var/www/api/smarttorrent/search/wordlist.wl
+ip_list = /var/www/api/smarttorrent/utilities/ips.list 
+
+#Directories
+utility_data = /var/www/api/smarttorrent/utilities/data/
+search_cache = /var/www/api/smarttorrent/search/cache/
+
+

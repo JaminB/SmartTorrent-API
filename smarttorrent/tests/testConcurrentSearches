@@ -1,0 +1,7 @@
+#! /bin/bash
+	time ./testSearchBuilder.py > out.txt &
+	time ./testSearchBuilder.py > out.txt &
+	time ./testSearchBuilder.py > out.txt &
+	time ./testSearchBuilder.py > out.txt &
+	time ./testSearchBuilder.py > out.txt &
+	time ./testSearchBuilder.py > out.txt &

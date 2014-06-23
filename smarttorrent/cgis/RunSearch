@@ -1,0 +1,21 @@
+#!/usr/bin/python
+import sys
+import cgi
+from search import searchbuilder
+from search import searchcache
+def GET():
+	print "Content-type:text/json\r\n\r\n"
+	buildcache = searchbuilder.Search("linkin park 2","music")
+	if buildcache.check_in_cache():
+		print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
+
+	else:
+		buildcache.build_cache()
+		cache = buildcache.get_cache()
+		json = cache.to_json()
+		lines = json.split('\n')
+		for line in lines:
+			print line
+
+
+GET()
