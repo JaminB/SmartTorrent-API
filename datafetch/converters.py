@@ -7,7 +7,7 @@ class date:
 	def convert(self):
 		dateArray = self.dateString.split(' ')
 		if len(dateArray[1]) > 1:
-			str(dateArray[2]) + "-" + self.months[dateArray[0]] + "-" + dateArray[1]
+			return str(dateArray[2]) + "-" + self.months[dateArray[0]] + "-" + dateArray[1]
 		else:
 				
-			str(dateArray[2]) + "-" + self.months[dateArray[0]] + "-" + "0"+dateArray[1]
+			return str(dateArray[2]) + "-" + self.months[dateArray[0]] + "-" + "0"+dateArray[1]

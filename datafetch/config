@@ -4,3 +4,4 @@ ips_location = /var/www/api/datafetch/ips.list
 
 #Directories
 session_data =/var/www/api/datafetch/session-data/
+search_cache =/var/www/api/datafetch/cache/

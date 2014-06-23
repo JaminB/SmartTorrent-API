@@ -18,7 +18,6 @@ def check_exists_by_hash(hash):
 	return False
 
 def open_search_by_hash(hash):
-	print "test"	
 	try:
 		search = open(cache+hash, "r")
 		return search.read()
