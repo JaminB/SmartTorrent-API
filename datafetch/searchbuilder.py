@@ -201,7 +201,7 @@ class ResultCache:
 		return self.dates
 	
 	def to_json(self):
-		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "dates:" : self.dates, "comments" : self.commentAnalysis, "rating": self.overallRating},sort_keys=True, indent=4)
+		return json.dumps({"titles": self.titles, "magnet_links": self.magnetLinks, "info_links": self.infoLinks, "seeds" : self.seeds, "leeches" : self.leeches, "sizes" : self.sizes, "languages" : self.languages, "number_of_files" : self.numberOfFilesList, "dates" : self.dates, "comments" : self.commentAnalysis, "rating": self.overallRating},sort_keys=True, indent=4)
 
 
 class Search:
@@ -225,7 +225,7 @@ class Search:
 		return searchcache.check_exists_by_hash(hash)
 
 	def _hash_title_and_category(self):
-		return md5(self.searchTitle + self.searchCategory).hexdigest()
+		return md5(self.searchTitle.lower() + self.searchCategory.lower()).hexdigest()
 
 	def check_in_cache(self):
 		return self.isInCache
@@ -247,6 +247,7 @@ class Search:
       
 
 	#################################
+
 	def _get_content(self,url):
 		#Get the actual raw HTML of info page and return a tuple containing the raw_html ([0]) and the url ([1]) associated with it
 		content = Content(url)
