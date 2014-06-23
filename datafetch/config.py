@@ -1,6 +1,6 @@
 import sys
 #Config Location
-configFile = "/home/jamin/smart_torrent/smart_torrent/datafetch/config"
+configFile = "/var/www/api/datafetch/config"
 #DO NOT EDIT BELOW THIS LINE#
 config = open(configFile, "r")
 options = ["ips_location", "wordlist_location", "session_data", "search_cache"]
