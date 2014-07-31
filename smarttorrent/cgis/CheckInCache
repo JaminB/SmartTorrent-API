@@ -6,26 +6,22 @@ import json
 def GET():
 	form = cgi.FieldStorage()
 	print "Content-type:text/json\r\n\r\n"
-	if "hash" not in form:
-		print '{ "error": "Please fill in hash field." }'
-		return
-	else:
-		result  = searchcache.lookup_exists_by_hash(str(form["hash"].value))
-		print json.dumps({"in_cache": result },sort_keys=True, indent=4)
+#	result  = searchcache.lookup_exists_by_hash(str(form["hash"].value))
+	#print json.dumps({"in_cache": result },sort_keys=True, indent=4)
 
-		for line in lines:
-			#spaces = 0
-			#for i in line:
-			#	if i == ' ':
-			#		spaces += 1
-			#	else:
-			#		break
-			#for i in range(0, spaces):
-			#	print '&nbsp;'
-			
-						
-			print line
-			#print "<br>"
+	for line in lines:
+		#spaces = 0
+		#for i in line:
+		#	if i == ' ':
+		#		spaces += 1
+		#	else:
+		#		break
+		#for i in range(0, spaces):
+		#	print '&nbsp;'
+		
+					
+		print line
+		#print "<br>"
 
 
 GET()

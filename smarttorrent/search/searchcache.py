@@ -23,4 +23,10 @@ def open_search_by_hash(hash):
 		return search.read()
 	except Exception,e:
 		print str(e)
-		#return "No result cached"
+		return "No result cached"
+
+def get_size_by_hash(hash):
+	try:
+		return os.path.getsize(cache+hash)
+	except Exception, e:
+		return "Could not derive size of cached search"
