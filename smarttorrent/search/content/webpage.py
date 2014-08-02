@@ -53,7 +53,7 @@ class PirateBayURLBuilder:
 			categoryURI = self.tvURI
 
 		elif self.category.lower() == "books" or self.category.lower() == "book":
-			categoryURI = self.booksURI
+			categoryURI = self.bookURI
 
 		
 		elif self.category.lower() == "game" or self.category == "games":
