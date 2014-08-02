@@ -31,6 +31,9 @@ class ResultCache:
 		self.dates = [] 
 	def __str__(self):
 		return str(self.titles) + str(self.magnetLinks) + str(self.seeds) + str(self.leeches) + str(self.sizes) + str(self.infoLinks) + str(self.comments) + str(self.languages)
+
+	def __len__(self):
+		return len(self.titles)
 	
 	def _get_magnet_hashes(self):
 		#Returns a list of all the magnet hashes in a given search

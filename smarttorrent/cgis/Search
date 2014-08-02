@@ -26,8 +26,12 @@ def GET():
 				print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
 				buildcache.build_cache()	
 			else:
-				buildcache.build_cache()
-				cache = buildcache.get_cache()
+				try:
+					buildcache.build_cache()
+					cache = buildcache.get_cache()
+				except:
+					print "{no results}"
+					return
 				if len(cache.get_cache()) == 0:
 					print "{no results}"
 				else:
@@ -36,22 +40,6 @@ def GET():
 					for line in lines:
 						print line
 ######
-
-	if param == "size":
-		print json.dumps({"search_size":searchcache.get_size_by_hash(buildcache._hash_title_and_category())})
-	elif buildcache.check_in_cache():
-		result = searchcache.open_search_by_hash(buildcache._hash_title_and_category())
-		print result	
-		#print buildcache._hash_title_and_category()
-
-	else:
-		#print json.dumps({"search_location":"/Search?hash="+buildcache._hash_title_and_category()},sort_keys=True, indent=4)
-		print json.dumps({"access_results": "api/Search?term="+title+"&category="+category})
-		buildcache.build_cache()
-		#json = cache.to_json()
-		#lines = json.split('\n')
-		#for line in lines:
-		#	print line
 
 
 GET()

@@ -97,6 +97,7 @@
                 []
             ]
         ], 
+        [], 
         [
             [
                 "Good torrent, thanks up/l . ", 
@@ -226,6 +227,13 @@
         [], 
         [], 
         [
+            [
+                "this is the promo not retail ", 
+                0, 
+                [], 
+                [], 
+                []
+            ], 
             [
                 "seed pls!! ", 
                 0, 
@@ -360,7 +368,6 @@
             ]
         ], 
         [], 
-        [], 
         [
             [
                 "seeds please ", 
@@ -388,482 +395,6 @@
         [], 
         [], 
         [], 
-        [], 
-        [
-            [
-                "dont download this has a major virus on it that will fry your computer. VIRUS!!!! VIRUS!!!!!", 
-                -30, 
-                [
-                    [
-                        "virus", 
-                        "virus", 
-                        31, 
-                        36, 
-                        -5
-                    ], 
-                    [
-                        "VIRUS!!!!", 
-                        "virus", 
-                        72, 
-                        81, 
-                        -5
-                    ], 
-                    [
-                        "VIRUS!!!!!", 
-                        "virus", 
-                        82, 
-                        92, 
-                        -5
-                    ]
-                ], 
-                [
-                    [
-                        "download", 
-                        "download", 
-                        5, 
-                        13, 
-                        0
-                    ]
-                ], 
-                [
-                    [
-                        "Malware Detected", 
-                        31, 
-                        92, 
-                        -15
-                    ]
-                ]
-            ], 
-            [
-                "Why would you upload a file that is protected by iTunes?  If you wanna give me your password for your account so I can listen to the file that you gave to me then please do so.  kthxbai", 
-                0, 
-                [], 
-                [
-                    [
-                        "upload", 
-                        "upload", 
-                        14, 
-                        20, 
-                        0
-                    ]
-                ], 
-                []
-            ]
-        ], 
-        [
-            [
-                "Thanks", 
-                5, 
-                [
-                    [
-                        "Thanks", 
-                        "thanks", 
-                        0, 
-                        6, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "here's the video if u want it<br />\r", 
-                0, 
-                [], 
-                [
-                    [
-                        "video", 
-                        "video", 
-                        11, 
-                        16, 
-                        0
-                    ]
-                ], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "Thank You. Kelly Hansen is an awesome front man for Foreigner!", 
-                9, 
-                [
-                    [
-                        "awesome", 
-                        "awesome", 
-                        30, 
-                        37, 
-                        4
-                    ], 
-                    [
-                        "Thank", 
-                        "thanks", 
-                        0, 
-                        5, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "Don't download! This is bad quality, every other song fades in and out consistently thats very noticeable. just dont waste your time", 
-                -13, 
-                [
-                    [
-                        "bad", 
-                        "bad", 
-                        24, 
-                        27, 
-                        -3
-                    ]
-                ], 
-                [
-                    [
-                        "download!", 
-                        "download", 
-                        6, 
-                        15, 
-                        0
-                    ], 
-                    [
-                        "quality,", 
-                        "quality", 
-                        28, 
-                        36, 
-                        0
-                    ], 
-                    [
-                        "song", 
-                        "song", 
-                        49, 
-                        53, 
-                        0
-                    ]
-                ], 
-                [
-                    [
-                        "Bad Quality", 
-                        6, 
-                        53, 
-                        -10
-                    ]
-                ]
-            ]
-        ], 
-        [], 
-        [], 
-        [], 
-        [], 
-        [], 
-        [], 
-        [], 
-        [], 
-        [
-            [
-                "Thanks", 
-                5, 
-                [
-                    [
-                        "Thanks", 
-                        "thanks", 
-                        0, 
-                        6, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "Tack!", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "kickass torrent! just what I needed<br />", 
-                0, 
-                [], 
-                [
-                    [
-                        "torrent!", 
-                        "torrent", 
-                        8, 
-                        16, 
-                        0
-                    ]
-                ], 
-                []
-            ], 
-            [
-                "Thanks!", 
-                5, 
-                [
-                    [
-                        "Thanks!", 
-                        "thanks", 
-                        0, 
-                        7, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ]
-        ], 
-        [
-            [
-                "THANK YOU SO MUCH!!!! <br />", 
-                5, 
-                [
-                    [
-                        "THANK", 
-                        "thanks", 
-                        0, 
-                        5, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "Can someone seed please. Currently 0 seeds :(", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "seeds please", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "this band is fucking brutal", 
-                -2, 
-                [
-                    [
-                        "fucking", 
-                        "fucking", 
-                        13, 
-                        20, 
-                        -2
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "Seeder for life!!! I want to share this great album", 
-                14, 
-                [
-                    [
-                        "great", 
-                        "great", 
-                        40, 
-                        45, 
-                        4
-                    ]
-                ], 
-                [
-                    [
-                        "album", 
-                        "album", 
-                        46, 
-                        51, 
-                        0
-                    ]
-                ], 
-                [
-                    [
-                        "Good Quality", 
-                        40, 
-                        51, 
-                        10
-                    ]
-                ]
-            ], 
-            [
-                "thanks great torrent", 
-                19, 
-                [
-                    [
-                        "great", 
-                        "great", 
-                        7, 
-                        12, 
-                        4
-                    ], 
-                    [
-                        "thanks", 
-                        "thanks", 
-                        0, 
-                        6, 
-                        5
-                    ]
-                ], 
-                [
-                    [
-                        "torrent", 
-                        "torrent", 
-                        13, 
-                        20, 
-                        0
-                    ]
-                ], 
-                [
-                    [
-                        "Good Quality", 
-                        7, 
-                        20, 
-                        10
-                    ]
-                ]
-            ]
-        ], 
-        [
-            [
-                "What a band........Thank you oh so much......Got Mule?  Now I do.<br />", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "Love the Mule!<br />", 
-                4, 
-                [
-                    [
-                        "Love", 
-                        "love", 
-                        0, 
-                        4, 
-                        4
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "My pleasure to share. All I ask is to support the band by attending their performances and bring your friends. Buy a T-shirt or some stickers, etc. :)", 
-                0, 
-                [], 
-                [], 
-                []
-            ]
-        ], 
-        [], 
-        [], 
-        [], 
-        [
-            [
-                "feedback appreciated, positive and negative.", 
-                5, 
-                [
-                    [
-                        "appreciated,", 
-                        "appreciate", 
-                        9, 
-                        21, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "Thanks so much,<br />", 
-                5, 
-                [
-                    [
-                        "Thanks", 
-                        "thanks", 
-                        0, 
-                        6, 
-                        5
-                    ]
-                ], 
-                [], 
-                []
-            ], 
-            [
-                "Sorry folks - this doesn't work!<br />", 
-                0, 
-                [], 
-                [], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "seed please!", 
-                0, 
-                [], 
-                [], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "seed please!", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "seed!", 
-                0, 
-                [], 
-                [], 
-                []
-            ], 
-            [
-                "Im seeding download while you can!", 
-                0, 
-                [], 
-                [
-                    [
-                        "download", 
-                        "download", 
-                        11, 
-                        19, 
-                        0
-                    ]
-                ], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "Well done", 
-                0, 
-                [], 
-                [], 
-                []
-            ]
-        ], 
-        [], 
-        [
-            [
-                "Please seed! :D", 
-                0, 
-                [], 
-                [], 
-                []
-            ]
-        ], 
         []
     ], 
     "dates": [
@@ -871,6 +402,7 @@
         "2014-01-24", 
         "Unknown", 
         "Unknown", 
+        "2013-09-22", 
         "Unknown", 
         "Unknown", 
         "Unknown", 
@@ -885,43 +417,19 @@
         "Unknown", 
         "Unknown", 
         "Unknown", 
-        "2013-09-22", 
         "2014-02-10", 
         "Unknown", 
         "Unknown", 
         "Unknown", 
         "Unknown", 
-        "Unknown", 
-        "2009-05-31", 
-        "2012-10-30", 
-        "2013-11-25", 
-        "2009-07-15", 
-        "2010-07-06", 
-        "2014-03-27", 
-        "2009-08-02", 
-        "2008-07-16", 
-        "2008-01-15", 
-        "2013-02-08", 
-        "2011-03-20", 
-        "2011-05-26", 
-        "2012-01-21", 
-        "2009-05-17", 
-        "2012-09-02", 
-        "2013-08-09", 
-        "2010-02-24", 
-        "2008-05-26", 
-        "2005-12-29", 
-        "2009-03-27", 
-        "2008-08-03", 
-        "2008-07-21", 
-        "2012-11-04", 
-        "2008-04-15"
+        "Unknown"
     ], 
     "info_links": [
         "http://kickass.to/black-veil-brides-in-the-end-leaked-single-2012-320kbps-t6786575.html", 
         "http://kickass.to/gov-t-mule-the-deepest-end-live-in-concert-2003-eac-flac-t8648687.html", 
         "http://kickass.to/foreigner-no-end-in-sight-the-very-best-of-foreigner-t4457567.html", 
         "http://kickass.to/shel-silverstein-where-the-sidewalk-ends-a-light-in-the-atti-t3936451.html", 
+        "http://kickass.to/in-the-end-linkin-park-mp3-t7908698.html", 
         "http://kickass.to/roll-deep-in-at-the-deep-end-2005-hip-hop-t642155.html", 
         "http://kickass.to/the-world-ends-with-you-subarashiki-konosekai-complete-ost-in-t5806453.html", 
         "http://kickass.to/sidsel-endresen-bugge-wesseltoft-out-here-in-there-t1050422.html", 
@@ -936,37 +444,12 @@
         "http://kickass.to/kat-deluna-in-the-end-t2274205.html", 
         "http://kickass.to/the-year-ends-in-arson-vessels-2009-metalcore-irg-t5205614.html", 
         "http://kickass.to/daryl-hall-3-hearts-in-the-happy-ending-machine-320-kbps-t5954270.html", 
-        "http://kickass.to/in-the-end-linkin-park-mp3-t7908698.html", 
         "http://kickass.to/forever-ends-today-we-are-the-fun-in-funeral-m4a-256kbps-littlefairyrg-tinker-t8757296.html", 
         "http://kickass.to/the-doors-the-end-live-in-toronto-1967-t529160.html", 
         "http://kickass.to/x-ray-dog-the-vision-end-music-in-atonement-2007-trailer-t584345.html", 
         "http://kickass.to/the-never-ending-mix-part-3-the-hardstyle-in-me-dj-flow-fixed-wav-t589215.html", 
         "http://kickass.to/kat-deluna-in-the-end-dj-ngel-club-mix-febrero-2008-t655416.html", 
-        "http://kickass.to/the-never-ending-mix-part-7-the-tribal-house-in-me-wav-t953923.html", 
-        "http://piratebay.net/torrent/4923259/Linkin_Park_-_In_the_End", 
-        "http://piratebay.net/torrent/7775391/Black_Veil_Brides_-_In_The_End", 
-        "http://piratebay.net/torrent/9247005/Linkin_Park_-_2002_-_In_the_End", 
-        "http://piratebay.net/torrent/5004213/[2000]_In_The_End_[CDS]_-_Linkin_Park_-_76_1mb___320kbs", 
-        "http://piratebay.net/torrent/5671490/Mark_Tavener_-_In_The_Red__Balance__Chair____End_-_Audio_Comedy_", 
-        "http://piratebay.net/torrent/9836184/In_The_End", 
-        "http://piratebay.net/torrent/5037352/Linkin_Park_-_In_the_End_(Rap_Remix)_[AKASH]", 
-        "http://piratebay.net/torrent/4300399/Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-2CD-2008-XX", 
-        "http://piratebay.net/torrent/3978761/Abominable_Putridity_-_2007_-_In_The_End_Of_Human_Existence", 
-        "http://piratebay.net/torrent/8118940/Gov_t_Mule_The_Deepest_End__Live_In_Concert", 
-        "http://piratebay.net/torrent/6257632/Ceremonial_Perfection_-__Alone_In_The_End_(2010)", 
-        "http://piratebay.net/torrent/6425524/Ceremonial_Perfection_-_Alone_in_the_End_(2010)_[APE]", 
-        "http://piratebay.net/torrent/6972882/Shortbus_Ending_Music_-_Mx_Justin_Vivian_Bond_-_In_The_End_MP3", 
-        "http://piratebay.net/torrent/4899985/We_Are_The_Pirate_Bay_In_The_End_Instrumentals", 
-        "http://piratebay.net/torrent/7593666/in_the_end", 
-        "http://piratebay.net/torrent/8795424/IIO_-_In_The_End_-_CDM_-_2005_-_Made_Records_MREC08CD", 
-        "http://piratebay.net/torrent/5390121/Abominable_Putridity_-_In_the_end_of_Human_Existance_(2007)", 
-        "http://piratebay.net/torrent/4205540/NWO_in_The_End_Times_-_Alex_Jones_and_Chuck_Missler", 
-        "http://piratebay.net/torrent/3425664/Roll_Deep_-_In_At_The_Deep_End", 
-        "http://piratebay.net/torrent/4804010/Niger-the_end_of_begining(in_memory_of_people_who_die_from_cance", 
-        "http://piratebay.net/torrent/4325849/Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-(Rerip)-2CD", 
-        "http://piratebay.net/torrent/4308214/Martin_And_Wood_-_End_Of_The_World_Party_(Just_In_Case).mp3", 
-        "http://piratebay.net/torrent/7789786/Linkin_Park_-_In_The_End_-_Single", 
-        "http://piratebay.net/torrent/4135327/Percy_Farm_-_The_End_In_The_Beginning"
+        "http://kickass.to/the-never-ending-mix-part-7-the-tribal-house-in-me-wav-t953923.html"
     ], 
     "languages": [
         "Unknown", 
@@ -975,30 +458,6 @@
         "Unknown", 
         "Unknown", 
         "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "Unknown", 
-        "English ", 
         "Unknown", 
         "Unknown", 
         "Unknown", 
@@ -1027,6 +486,7 @@
         0, 
         0, 
         0, 
+        0, 
         2, 
         0, 
         3, 
@@ -1043,38 +503,14 @@
         0, 
         0, 
         0, 
-        0, 
-        1, 
-        1, 
-        0, 
-        2, 
-        2, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        1, 
-        1, 
-        1, 
-        1, 
-        1, 
-        0, 
-        5, 
-        0, 
-        1, 
-        1, 
-        6, 
-        0
+        1
     ], 
     "magnet_links": [
         "magnet:?xt=urn:btih:A1709E3AC25F0588897991393380A9007E827074&dn=black+veil+brides+in+the+end+leaked+single+2012+320kbps&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:775DDECA61706DDE5BA12FF05099B81A4C97B20D&dn=gov+t+mule+the+deepest+end+live+in+concert+2003+eac+flac&tr=http%3A%2F%2Ftracker.nwps.ws%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:3069f7748f164215b705a99b399403b451755722&dn=foreigner+no+end+in+sight+the+very+best+of+foreigner&tr=udp%3A%2F%2Ftracker.ilibr.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:90122b857e601fb12077015af235ac2d174ca56f&dn=shel+silverstein+where+the+sidewalk+ends+a+light+in+the+atti&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
+        "magnet:?xt=urn:btih:6A8585D0EB1500B5B5F10B4086AED9ADCF89971D&dn=in+the+end+linkin+park+mp3&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:8da70d735ba3c7118e38707644fda5cdb4e5a723&dn=roll+deep+in+at+the+deep+end+2005+hip+hop&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:b6da8c57506710c87c5269abb30030726bea378c&dn=the+world+ends+with+you+subarashiki+konosekai+complete+ost+in&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:5933a2bf57c4f741af64e8a7634049d42474fc2c&dn=sidsel+endresen+bugge+wesseltoft+out+here+in+there&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
@@ -1089,43 +525,19 @@
         "magnet:?xt=urn:btih:960b2c29c7dcfd242728e78a6a87201b4bc1e09c&dn=kat+deluna+in+the+end&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:06403872a1d9565da5f75fe4c3509e308572e017&dn=the+year+ends+in+arson+vessels+2009+metalcore+irg&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:2d3ea432aae9b03bc7e537a3cd3a8de33f336787&dn=daryl+hall+3+hearts+in+the+happy+ending+machine+320+kbps&tr=http%3A%2F%2Ftracker.episode7.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:6A8585D0EB1500B5B5F10B4086AED9ADCF89971D&dn=in+the+end+linkin+park+mp3&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:51A3298E0DDA53071FFDE234D74FE0529BACB6FF&dn=forever+ends+today+we+are+the+fun+in+funeral+m4a+256kbps+littlefairyrg+tinker&tr=udp%3A%2F%2Fglotorrents.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:1ae38ce0e89644eb083fce37d630f17ba8ba75c8&dn=the+doors+the+end+live+in+toronto+1967&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:18751dcbb65b7c5c02fe7f63e3152c6742ded8da&dn=x+ray+dog+the+vision+end+music+in+atonement+2007+trailer&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:2e05469812818348d776ab9a75e6fbb789296cc9&dn=the+never+ending+mix+part+3+the+hardstyle+in+me+dj+flow+fixed+wav&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
         "magnet:?xt=urn:btih:234169258762379ff3a3874a4cb72922e30ade3b&dn=kat+deluna+in+the+end+dj+ngel+club+mix+febrero+2008&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:62f45adc73bc24da7efd0bcc23ecc44f24172259&dn=the+never+ending+mix+part+7+the+tribal+house+in+me+wav&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:1b4fa22438ead0ac9dc58c6531d67835b6afcf89&dn=Linkin+Park+-+In+the+End&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:ee153d5cb1860a34619794d3c9157c0deb422fb4&dn=Black+Veil+Brides+-+In+The+End&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:05778fb2e2eb02598b818a8fcc3643694652de7b&dn=Linkin+Park+-+2002+-+In+the+End&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:b9c796faa4406991cb87d2eccec57c76b629c09d&dn=%5B2000%5D+In+The+End+%5BCDS%5D+-+Linkin+Park+-+76+1mb+%40+320kbs&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:71fd4f3b571710770b6b569b1f0e3dbbe6313be0&dn=Mark+Tavener+-+In+The+Red%2C+Balance%2C+Chair%2C+%26+End+-+Audio+Comedy+&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:31969767d74cfbba11affb11597f9134c1927157&dn=In+The+End&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:66d9b8ab7dda52991d0176c470d1ce69fb9077b6&dn=Linkin+Park+-+In+the+End+%28Rap+Remix%29+%5BAKASH%5D&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:9b479a6db5821b95e26b37a560ca77c963150273&dn=Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-2CD-2008-XX&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:ad89c72ab00a44e4351451ae99060b984c9db7de&dn=Abominable+Putridity+-+2007+-+In+The+End+Of+Human+Existence&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:b74d57cdf4f744070612fea04801590b8fa490cc&dn=Gov%27t+Mule_The+Deepest+End_+Live+In+Concert&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:fe370aabd7d668cef07c0c220a71536e49d13b83&dn=Ceremonial+Perfection+-++Alone+In+The+End+%282010%29&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:f38bff3252b5f83f5d3b4a7e3adddbc73a9b2790&dn=Ceremonial+Perfection+-+Alone+in+the+End+%282010%29+%5BAPE%5D&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:f0d54e2b9c85004bfb475a1342eb61295c9c8873&dn=Shortbus+Ending+Music+-+Mx+Justin+Vivian+Bond+-+In+The+End+MP3&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:f7c74fa79c8ab55323c27e61d1eb77b12b348ded&dn=We+Are+The+Pirate+Bay%2FIn+The+End+Instrumentals&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:f7d406e6f44b05f31d06d3f8a65f743d8d7993e6&dn=in+the+end&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:037e0064df82ce1c63200a4072bcd207949561cb&dn=IIO+-+In+The+End+-+CDM+-+2005+-+Made+Records+MREC08CD&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:14d2dcc6b444b4f730ddec3bf880d6a7110e8d43&dn=Abominable+Putridity+-+In+the+end+of+Human+Existance+%282007%29&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:185926add06c356a2857a71d8342328b4b30fbcf&dn=NWO+in+The+End+Times+-+Alex+Jones+and+Chuck+Missler&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:56c6a788094a9d7f0fe7611b8e743308bceef05b&dn=Roll+Deep+-+In+At+The+Deep+End&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:5a9632d6d5c2b452e16da2603ac35ac4226216d9&dn=Niger-the+end+of+begining%28in+memory+of+people+who+die+from+cance&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:64ab803feae9c628f08a779022fbb6035c2ae806&dn=Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-%28Rerip%29-2CD&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:7c7f85f3ca47622be04690558d2468e4cbd63a19&dn=Martin+And+Wood+-+End+Of+The+World+Party+%28Just+In+Case%29.mp3&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:bbfba9b6e0a8abe76c52b3c56f5c9eda9ab4b9e3&dn=Linkin+Park+-+In+The+End+-+Single&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com", 
-        "magnet:?xt=urn:btih:c122bb4753cd5fd4783fba7eb4d38c54d0472552&dn=Percy+Farm+-+The+End+In+The+Beginning&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com"
+        "magnet:?xt=urn:btih:62f45adc73bc24da7efd0bcc23ecc44f24172259&dn=the+never+ending+mix+part+7+the+tribal+house+in+me+wav&tr=http%3A%2F%2Ftracker.openbittorrent.com%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com"
     ], 
     "number_of_files": [
         1, 
         34, 
         30, 
         40, 
+        1, 
         15, 
         35, 
         11, 
@@ -1140,49 +552,19 @@
         1, 
         11, 
         14, 
-        1, 
         12, 
         3, 
         1, 
         1, 
         1, 
-        1, 
-        1, 
-        1, 
-        11, 
-        34, 
-        15, 
-        12, 
-        25, 
-        42, 
-        6, 
-        1, 
-        6, 
-        1, 
-        38, 
-        10, 
-        22, 
-        10, 
-        10, 
-        5, 
-        1, 
-        1, 
-        10, 
-        10, 
-        13, 
-        1, 
-        20, 
-        1, 
-        38, 
-        1, 
-        1, 
-        11
+        1
     ], 
     "rating": [
         3, 
         10, 
         0, 
         4, 
+        0, 
         18, 
         0, 
         19, 
@@ -1198,38 +580,7 @@
         0, 
         14, 
         0, 
-        0, 
         5, 
-        0, 
-        0, 
-        0, 
-        0, 
-        -30, 
-        5, 
-        0, 
-        -4, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        10, 
-        36, 
-        4, 
-        0, 
-        0, 
-        0, 
-        5, 
-        0, 
-        5, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
         0, 
         0, 
         0, 
@@ -1240,6 +591,7 @@
         17, 
         12, 
         9, 
+        8, 
         7, 
         7, 
         6, 
@@ -1255,42 +607,18 @@
         2, 
         2, 
         2, 
-        2, 
         1, 
         1, 
         1, 
         1, 
-        1, 
-        32, 
-        26, 
-        13, 
-        7, 
-        3, 
-        2, 
-        2, 
-        1, 
-        1, 
-        1, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0, 
-        0
+        1
     ], 
     "sizes": [
         "8.81 MB", 
         "1.03 GB", 
         "190.14 MB", 
         "79.45 MB", 
+        "3.3 MB", 
         "67.63 MB", 
         "355.85 MB", 
         "61.55 MB", 
@@ -1305,43 +633,19 @@
         "3.11 MB", 
         "51 MB", 
         "113.86 MB", 
-        "3.3 MB", 
         "69.98 MB", 
         "127.91 MB", 
         "2.53 MB", 
         "353.23 MB", 
         "10.88 MB", 
-        "426.78 MB", 
-        "3.43 MB", 
-        "8.81 MB", 
-        "59.19 MB", 
-        "76.19 MB", 
-        "631.86 MB", 
-        "152.72 MB", 
-        "3.23 MB", 
-        "206.45 MB", 
-        "47.83 MB", 
-        "1.01 GB", 
-        "59.42 MB", 
-        "301.04 MB", 
-        "23.11 MB", 
-        "8.09 MB", 
-        "29 MB", 
-        "519.68 MB", 
-        "47.83 MB", 
-        "326.77 MB", 
-        "112.7 MB", 
-        "4.88 MB", 
-        "206.35 MB", 
-        "74.03 MB", 
-        "6.06 MB", 
-        "61.37 MB"
+        "426.78 MB"
     ], 
     "titles": [
         "Black Veil Brides - In The End - (Leaked Single - 2012 @320kbps)", 
         "Gov't Mule - The Deepest End, Live In Concert (2003) [EAC - FLAC]", 
         "Foreigner - No End In Sight -  The Very Best of Foreigner", 
         "Shel Silverstein - Where The Sidewalk Ends &amp; A Light In The Atti", 
+        "In the end - linkin park.mp3", 
         "Roll Deep - In At The Deep End [2005] [Hip Hop]", 
         "The World Ends With You (Subarashiki Konosekai) Complete OST (In", 
         "Sidsel Endresen &amp; Bugge Wesseltoft - Out Here. In There", 
@@ -1356,36 +660,11 @@
         "! Kat Deluna - In The End", 
         "The Year Ends In Arson - Vessels (2009) (Metalcore) -iRG", 
         "Daryl Hall 3 Hearts In The Happy Ending Machine 320 Kbps", 
-        "In the end - linkin park.mp3", 
         "Forever Ends Today - We Are The Fun In Funeral (M4A @256kbps) LittleFairyRG [Tinker]", 
         "The Doors The End (Live In Toronto 1967)", 
         "X-Ray Dog - The Vision [End Music in Atonement (2007) Trailer]", 
         "The Never Ending Mix- Part 3 - The Hardstyle in Me - DJ Flow Fixed wav", 
         "Kat Deluna - In the End (Dj Ngel Club Mix Febrero 2008)", 
-        "The Never Ending Mix Part 7 The Tribal House In Me wav", 
-        "Linkin Park - In the End", 
-        "Black Veil Brides - In The End", 
-        "Linkin Park - 2002 - In the End", 
-        "[2000] In The End [CDS] - Linkin Park - 76 1mb @ 320kbs", 
-        "Mark Tavener - In The Red, Balance, Chair, & End - Audio Comedy ", 
-        "In The End", 
-        "Linkin Park - In the End (Rap Remix) [AKASH]", 
-        "Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-2CD-2008-XX", 
-        "Abominable Putridity - 2007 - In The End Of Human Existence", 
-        "Gov't Mule_The Deepest End_ Live In Concert", 
-        "Ceremonial Perfection -  Alone In The End (2010)", 
-        "Ceremonial Perfection - Alone in the End (2010) [APE]", 
-        "Shortbus Ending Music - Mx Justin Vivian Bond - In The End MP3", 
-        "We Are The Pirate Bay/In The End Instrumentals", 
-        "in the end", 
-        "IIO - In The End - CDM - 2005 - Made Records MREC08CD", 
-        "Abominable Putridity - In the end of Human Existance (2007)", 
-        "NWO in The End Times - Alex Jones and Chuck Missler", 
-        "Roll Deep - In At The Deep End", 
-        "Niger-the end of begining(in memory of people who die from cance", 
-        "Foreigner-No_End_In_Sight-The_Very_Best_Of_Foreigner-(Rerip)-2CD", 
-        "Martin And Wood - End Of The World Party (Just In Case).mp3", 
-        "Linkin Park - In The End - Single", 
-        "Percy Farm - The End In The Beginning"
+        "The Never Ending Mix Part 7 The Tribal House In Me wav"
     ]
 }
