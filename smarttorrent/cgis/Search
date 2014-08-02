@@ -24,7 +24,6 @@ def GET():
 			
 			if buildcache.check_in_cache():
 				print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
-				buildcache.build_cache()	
 			else:
 				try:
 					buildcache.build_cache()
