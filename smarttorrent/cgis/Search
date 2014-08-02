@@ -30,10 +30,10 @@ def GET():
 					buildcache.build_cache()
 					cache = buildcache.get_cache()
 				except:
-					print '"{no results}"'
+					print '{"error: " "no results"}'
 					return
 				if len(cache.get_cache()) == 0:
-					print '"{no results}"'
+					print '{"error: " "no results"}'
 				else:
 					json = cache.to_json()
 					lines = json.split('\n')
