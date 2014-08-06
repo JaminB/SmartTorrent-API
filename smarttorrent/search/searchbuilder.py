@@ -225,7 +225,7 @@ class Search:
 	
 	def _at_start_check_in_cache(self):
 		hash = self._hash_title_and_category()
-		return searchcache.check_exists_by_hash(hash)
+		return searchcache.db_check_exists_by_hash(hash)
 
 	def _hash_title_and_category(self):
 		return md5(self.searchTitle.lower() + self.searchCategory.lower()).hexdigest()
@@ -241,10 +241,10 @@ class Search:
 	def _write_to_persisted(self, cache):
 		#Writes a part of a results hash to a file  to a persisted file on the filesystem
 		try:
-			f = open(config.variables.get("search_cache") + self.persisthash, "w")
-		
-			f.write(cache.to_json())
-			f.close()
+			#f = open(config.variables.get("search_cache") + self.persisthash, "w")
+			#f.write(cache.to_json())
+			#f.close()
+			searchcache.db_persist_search(self.persisthash,cache.to_json()) #EXPERIMENTAL DATABASE CACHE
 		except Exception,e: 
 			print str(e)
       

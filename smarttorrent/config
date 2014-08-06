@@ -6,4 +6,10 @@ ip_list = /var/www/api/smarttorrent/utilities/ips.list
 utility_data = /var/www/api/smarttorrent/utilities/data/
 search_cache = /var/www/api/smarttorrent/search/cache/
 
+#Database
+db_table_cache = cache 
+db_user = st
+db_password = tech0nsite!
+db_server = localhost
+ 
 

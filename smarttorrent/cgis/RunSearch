@@ -7,18 +7,18 @@ from search import searchcache
 def GET():
         form = cgi.FieldStorage()
 	print "Content-type:text/json\r\n\r\n"
-	term = "in the end "
+	term = "britney"
 	category = "music"
 	size = False
 	buildcache = searchbuilder.Search(term, category)
 	if size == True:
-		print jsobject.dumps({"size":searchcache.get_size_by_hash(buildcache._hash_title_and_category())})
+		print jsobject.dumps({"size":searchcache.db_get_size_by_hash(buildcache._hash_title_and_category())})
 
 	else:
 		
 		if buildcache.check_in_cache():
-			print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
-			buildcache.build_cache()	
+			#print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
+			print searchcache.db_open_search_by_hash(buildcache._hash_title_and_category())
 		else:
 			try:
 				buildcache.build_cache()

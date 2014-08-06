@@ -3,7 +3,7 @@ import sys
 configFile = "/var/www/api/smarttorrent/config"
 #DO NOT EDIT BELOW THIS LINE#
 config = open(configFile, "r")
-options = ["ip_list", "wordlist_location", "utility_data", "search_cache"]
+options = ["ip_list", "wordlist_location", "utility_data", "search_cache", "db_table_cache", "db_server", "db_user", "db_password"]
 variables = {}
 lineCount = 0
 for line in config:
