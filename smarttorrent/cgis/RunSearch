@@ -4,13 +4,15 @@ import cgi
 import json as jsobject
 from search import searchbuilder
 from search import searchcache
+from search import searchlog
 def GET():
         form = cgi.FieldStorage()
 	print "Content-type:text/json\r\n\r\n"
-	term = "britney"
+	term = "woodkid"
 	category = "music"
 	size = False
 	buildcache = searchbuilder.Search(term, category)
+	log = searchlog.db_insert_log_entry(buildcache._hash_title_and_category(), term, category)
 	if size == True:
 		print jsobject.dumps({"size":searchcache.db_get_size_by_hash(buildcache._hash_title_and_category())})
 

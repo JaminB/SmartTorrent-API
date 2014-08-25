@@ -1,0 +1,4 @@
+#! /bin/bash
+
+mysql -u st --password=tech0nsite! searches < show_table.sql
+
