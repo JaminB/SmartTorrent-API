@@ -18,8 +18,6 @@ class KickAssURLBuilder:
 	
 	def build(self):
 	#	print self.baseURI + self.search + " " + self.searchURI.replace('*mutator*',self.category)
-		if self.category.lower() == "any":
-			return self.baseURI + self.search + " " + self.searchURI.replace('*mutator*','')
 		return self.baseURI + self.search + " " + self.searchURI.replace('*mutator*',self.category)
 
 class PirateBayURLBuilder:
@@ -81,6 +79,7 @@ class Content:
 			request = urllib2.Request("http://"+str(self.url))
 		else:
 			request = urllib2.Request(self.url)
+		print self.url
 		request.add_header('Accept-encoding', 'gzip')
 		response = urllib2.urlopen(request)
 		if response.info().get('Content-Encoding') == 'gzip':

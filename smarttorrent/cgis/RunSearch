@@ -8,8 +8,8 @@ from search import searchlog
 def GET():
         form = cgi.FieldStorage()
 	print "Content-type:text/json\r\n\r\n"
-	term = "woodkid"
-	category = "music"
+	term = "star trek 3"
+	category = "any"
 	size = False
 	buildcache = searchbuilder.Search(term, category)
 	log = searchlog.db_insert_log_entry(buildcache._hash_title_and_category(), term, category)
@@ -22,12 +22,12 @@ def GET():
 			#print searchcache.open_search_by_hash(buildcache._hash_title_and_category())
 			print searchcache.db_open_search_by_hash(buildcache._hash_title_and_category())
 		else:
-			try:
-				buildcache.build_cache()
-				cache = buildcache.get_cache()
-			except:
-				print "{no results}"
-				return
+			#try:
+			buildcache.build_cache()
+			cache = buildcache.get_cache()
+			#except:
+			#	print "{no results}"
+			#	return
 			if len(buildcache.get_cache()) == 0:
 				print "{no results}"
 			else:
