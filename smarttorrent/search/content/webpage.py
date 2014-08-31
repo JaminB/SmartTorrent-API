@@ -79,7 +79,6 @@ class Content:
 			request = urllib2.Request("http://"+str(self.url))
 		else:
 			request = urllib2.Request(self.url)
-		print self.url
 		request.add_header('Accept-encoding', 'gzip')
 		response = urllib2.urlopen(request)
 		if response.info().get('Content-Encoding') == 'gzip':
