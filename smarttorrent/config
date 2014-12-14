@@ -10,7 +10,7 @@ search_cache = /var/www/api/smarttorrent/search/cache/
 db_table_cache = cache
 db_table_log = searches 
 db_user = st
-db_password = tech0nsite!
+db_password = whateveryoumakeit
 db_server = localhost
  
 
