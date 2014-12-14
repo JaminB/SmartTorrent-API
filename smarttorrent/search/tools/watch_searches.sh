@@ -6,13 +6,11 @@ do
 	
 	if [ "$output" != "$previousOutput" ];
 		then
-			echo CHANGE!
 			echo "$output" > output
-			echo "$output"
-	else
-			echo "$output"
+			echo "$previousOutput" > prevOutput
+			diff output prevOutput |head -n 4 | mail -s 'SmartTorrent Search' 9198809427@vtext.com
 
 	fi		
-	sleep 2
+	sleep 5
 	clear
 done

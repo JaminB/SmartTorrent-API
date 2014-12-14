@@ -1,1 +1,0 @@
-datafetch/wordlist.wl
