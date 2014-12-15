@@ -3,7 +3,7 @@
 import sys
 from search import searchbuilder
 
-cacheBuilder = searchbuilder.Search("the dark knight rises","movie")
+cacheBuilder = searchbuilder.Search("test","movie")
 cacheBuilder.build_cache()
 cache = cacheBuilder.get_cache()
 cache.de_duplicate_cache()
